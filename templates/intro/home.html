@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+{% block main %}
+<!-- Carousel wrapper -->
+<div id="carouselMaterialStyle" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="0" class="active" aria-current="true"
+        aria-label="Slide 1"></button>
+        <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- Inner -->
+    <div class="carousel-inner shadow-4-strong">
+        <!-- Single item -->
+        <div class="carousel-item active">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100"
+                alt="Sunset Over the City" />
+        </div>
+
+        <!-- Single item -->
+        <div class="carousel-item">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp" class="d-block w-100"
+                alt="Canyon at Nigh" />
+        </div>
+
+        <!-- Single item -->
+        <div class="carousel-item">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(23).webp" class="d-block w-100"
+                alt="Cliff Above a Stormy Sea" />
+        </div>
+    </div>
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- Carousel wrapper -->
+
+<div class="container shadow-5-strong my-3 p-3">
+    <h1 class="text-center">K Human Resource Management System</h1>
+    <div class="row align-items-center p-3">
+        <div class="col-sm-5 col-md-6">
+            K-HRM is a powerful and intuitive HRM software developed by K Software House. It is designed to streamline HR processes, enhance communication, and empower HR teams to make data-driven decisions. With K-HRM, businesses of all sizes can automate their HR tasks, manage employee data, track performance metrics, and much more. Our user-friendly interface and customizable features ensure that K-HRM meets the unique needs of your organization, saving you time and maximizing your HR efficiency. Discover the benefits of K-HRM today and take your HR management to the next level.
+        </div>
+        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+            <img decoding="async" loading="lazy" src="{% static 'intro/intro-image-1.jpg' %}" class="float-md-start w-100" alt="Introduction Image">
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

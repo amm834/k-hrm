@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block title %}Pricing{% endblock title %}
+
+{% block main %}
+
+<div class="container shadow-5-strong my-3 p-3">
+    <h1 class="h1 text-center">Pricing</h1>
+    <div class="card-group m-3">
+        <div class="card">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title text-center">Basic</h5>
+                <p class="card-text">
+                    <ul class="list-group list-group-light list-group-small">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                </p>
+                <button class="btn btn-outline-dark">
+                    Make a payment
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road"/>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title text-center">Advanced</h5>
+                <p class="card-text">
+                    <ul class="list-group list-group-light list-group-small">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                </p>
+                <button class="btn btn-outline-dark">
+                    Make a payment
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <img decoding="async" loading="lazy" src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top" alt="Los Angeles Skyscrapers"/>
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title text-center">Ultimate</h5>
+                <p class="card-text">
+                    <ul class="list-group list-group-light list-group-small">
+                        <li class="list-group-item">An item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                        <li class="list-group-item">A fourth item</li>
+                        <li class="list-group-item">And a fifth one</li>
+                    </ul>
+                </p>
+                <button class="btn btn-outline-dark">
+                    Make a payment
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

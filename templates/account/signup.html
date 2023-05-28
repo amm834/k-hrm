@@ -1,0 +1,80 @@
+{% extends "base/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Sign Up" %}{% endblock title %}
+
+{% block main %}
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+
+                    <h3 class="mb-3">{% trans "Sign Up" %}</h3>
+
+                    <p>{% blocktrans %}
+                        Already have an account? Then please
+                        <a class="text-black"
+                            hx-get="{{ login_url }}"
+                        >
+                            sign in
+                        </a>.
+                    {% endblocktrans %}</p>
+
+                    <form
+                        hx-post="{% url 'account_signup' %}"
+                    >
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        {% if form.email.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-outline mb-4">
+                            <input type="email" name="email" placeholder="Email address" autocomplete="email" required="" id="id_email" class="form-control form-control-lg" />
+                            <label class="form-label" for="id_email">Email</label>
+                        </div>
+
+                        {% if form.password1.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.password1.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" id="id_password1" class="form-control form-control-lg" />
+                            <label class="form-label" for="id_password1">Password</label>
+                        </div>
+
+                        {% if form.password2.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.password2.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-outline mb-4">
+                            <input type="password" name="password2" placeholder="Password" autocomplete="new-password" required="" id="id_password2" class="form-control form-control-lg" />
+                            <label class="form-label" for="id_password2">Password</label>
+                        </div>
+
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+
+                        <button class="btn btn-black btn-lg btn-block" type="submit">
+                            {% trans "Sign Up" %}
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}

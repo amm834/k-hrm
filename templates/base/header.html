@@ -1,0 +1,126 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-black bg-black">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2 btn btn-black p-2 text-white"
+            hx-get="{% url 'intro:home' %}"
+        >
+            K-HRM
+        </a>
+
+        <!-- Toggle button -->
+        <button
+            class="navbar-toggler text-white"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarButtonsExample"
+            aria-controls="navbarButtonsExample"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        {% if user.is_authenticated %}
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:home' %}"
+                    >Dashboard</button>
+                </li>
+                {% if user.is_staff or user.is_superuser %}
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:features' %}"
+                    >Employees</button>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:pricing' %}"
+                    >Performance</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:about' %}"
+                    >Reports</button>
+                </li>
+                {% if user.is_staff or user.is_superuser %}
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:contact' %}"
+                    >Admin</button>
+                </li>
+                {% endif %}
+            </ul>
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-danger text-white px-4 me-2"
+                    hx-get="{% url 'account_logout' %}"
+                    hx-target="body"
+                >
+                    Logout
+                </button>
+
+            </div>
+        </div>
+        <!-- Collapsible wrapper -->
+        {% else %}
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:home' %}"
+                    >Home</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:features' %}"
+                    >Features</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:pricing' %}"
+                    >Pricing</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:about' %}"
+                    >About</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link btn btn-black p-2 text-white"
+                        hx-get="{% url 'intro:contact' %}"
+                    >Contact Us</button>
+                </li>
+            </ul>
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+
+                <button type="button" class="btn btn-white px-4 me-2"
+                    hx-get="{% url 'account_login' %}"
+                >
+                    Login
+                </button>
+                <button type="button" class="btn btn-outline-white px-4 me-2"
+                    hx-get="{% url 'account_signup' %}"
+                >
+                    Signup
+                </button>
+
+            </div>
+        </div>
+        <!-- Collapsible wrapper -->
+        {% endif %}
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

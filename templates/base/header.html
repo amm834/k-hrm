@@ -59,15 +59,39 @@
             </ul>
             <!-- Left links -->
 
+            <!-- Right elements -->
             <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-danger text-white px-4 me-2"
-                    hx-get="{% url 'account_logout' %}"
-                    hx-target="body"
-                >
-                    Logout
-                </button>
-
+                <div class="dropdown">
+                    <button
+                        class="btn btn-none dropdown-toggle text-white"
+                        id="dropdownMenuLink"
+                        data-mdb-toggle="dropdown"
+                        data-mdb-auto-close="true"
+                        aria-expanded="false"
+                    >
+                        {{ user.email }}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li>
+                            <button class="dropdown-item"
+                                hx-get="{% url 'hrm:profile' %}"
+                            >Profile</button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item"
+                                hx-get="{% url 'account_change_password' %}"
+                            >Change Password</button>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <button class="dropdown-item text-danger"
+                                hx-get="{% url 'account_logout' %}"
+                            >Logout</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <!-- Right elements -->
         </div>
         <!-- Collapsible wrapper -->
         {% else %}

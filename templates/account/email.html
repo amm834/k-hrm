@@ -1,0 +1,115 @@
+{% extends 'base/base.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Email Addresses" %}{% endblock title %}
+
+{% block main %}
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+
+                    <h3 class="mb-3">{% trans "Email Addresses" %}</h3>
+
+                    {% if user.emailaddress_set.all %}
+                    <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
+
+                    <form 
+                        hx-post="{% url 'account_email' %}"
+                    >
+                    {% csrf_token %}
+                        <fieldset>
+
+                            {% for emailaddress in user.emailaddress_set.all %}
+                            <div class="form-check my-2">
+                                <label for="email_radio_{{forloop.counter}}" class="form-check-label">
+
+                                    <input id="email_radio_{{forloop.counter}}" class="form-check-input" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+
+                                {{ emailaddress.email }}
+                                    {% if emailaddress.verified %}
+                                    <span class="badge badge-primary">{% trans "Verified" %}</span>
+                                    {% else %}
+                                    <span class="badge badge-secondary">{% trans "Unverified" %}</span>
+                                    {% endif %}
+
+                                    {% if emailaddress.primary %}<span class="badge badge-info">{% trans "Primary" %}</span>{% endif %}
+                                </label>
+                            </div>
+                            {% endfor %}
+
+                            <div class="btn-group shadow-0" role="group">
+                                <button class="btn btn-outline-secondary" data-mdb-color="dark" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
+                                <button class="btn btn-outline-secondary" data-mdb-color="dark" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+                                <button class="btn btn-outline-secondary" data-mdb-color="dark" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                    
+                    {% else %}
+                    <div class="alert alert-warning" role="alert" data-mdb-color="warning">
+                        <i class="fas fa-exclamation-triangle me-3"></i>
+                        <strong>{% trans 'Warning:'%}</strong> {% trans "You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc." %}
+                    </div>
+                    {% endif %}
+
+                    <hr class="mx-4">
+
+                    {% if can_add_email %}
+
+                    <h5 class="h5">{% trans "Add Email Address" %}</h5>
+
+                    <form
+                        hx-post="{% url 'account_email' %}"
+                    >
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        {% if form.id_email.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.id_email.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-outline mb-4">
+                            <input type="email" name="email" placeholder="Email address" required="" id="id_email" class="form-control form-control-lg" />
+                            <label class="form-label" for="id_email">Email</label>
+                        </div>
+
+                        <button class="btn btn-black btn-lg btn-block" type="submit">
+                            {% trans "Add Email" %}
+                        </button>
+                    </form>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
+
+
+{% block extra_body %}
+<script type="text/javascript">
+(function() {
+  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+  var actions = document.getElementsByName('action_remove');
+  if (actions.length) {
+    actions[0].addEventListener("click", function(e) {
+      if (! confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  }
+})();
+</script>
+{% endblock %}

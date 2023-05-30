@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+if DEBUG:
+    # CSRF Trusted Domain for GitHub Workspace
+    CSRF_TRUSTED_ORIGINS = ['https://*.github.dev']
+
 # Application definition
 
 INSTALLED_APPS = [

@@ -38,7 +38,7 @@
                             {% blocktrans %}
                                 If you have not created an account yet, then please
                                     <a class="text-black" role="button"
-                                        hx-get="{{ signup_url }}"
+                                        href="{{ signup_url }}"
                                     >sign up</a> first.
                             {% endblocktrans %}
                         </p>
@@ -91,9 +91,9 @@
 
                         <hr class="mx-4">
 
-                        <button class="btn btn-tertiary text-black"
-                            hx-get="{% url 'account_reset_password' %}"
-                        >{% trans "Forgot Password?" %}</button>
+                        <a class="btn btn-tertiary text-black"
+                            href="{% url 'account_reset_password' %}"
+                        >{% trans "Forgot Password?" %}</a>
                     </form>
 
                 </div>

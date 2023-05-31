@@ -3,7 +3,7 @@
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
-        <a class="navbar-brand me-2 btn btn-black p-2 text-white"
+        <a class="navbar-brand text-white"
             href="{% url 'intro:home' %}"
         >
             K-HRM
@@ -22,128 +22,124 @@
             <i class="fas fa-bars"></i>
         </a>
 
-        {% if user.is_authenticated %}
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:home' %}"
-                    >Dashboard</a>
-                </li>
-                {% if user.is_staff or user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:features' %}"
-                    >Employees</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:pricing' %}"
-                    >Performance</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:about' %}"
-                    >Reports</a>
-                </li>
-                {% if user.is_staff or user.is_superuser %}
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:contact' %}"
-                    >Admin</a>
-                </li>
-                {% endif %}
-            </ul>
-            <!-- Left links -->
+            {% if user.is_authenticated %}
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:home' %}"
+                        >Dashboard</a>
+                    </li>
+                    {% if user.is_staff or user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:features' %}"
+                        >Employees</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:pricing' %}"
+                        >Performance</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:about' %}"
+                        >Reports</a>
+                    </li>
+                    {% if user.is_staff or user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:contact' %}"
+                        >Admin</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!-- Left links -->
 
-            <!-- Right elements -->
-            <div class="d-flex align-items-center">
-                <div class="dropdown">
-                    <a
-                        class="btn btn-none dropdown-toggle text-white"
-                        id="dropdownMenuLink"
-                        data-mdb-toggle="dropdown"
-                        data-mdb-auto-close="true"
-                        aria-expanded="false"
-                    >
-                        {{ user.email }}
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item"
-                                href="{% url 'account_email' %}"
-                            >Change Email</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item"
-                                href="{% url 'account_change_password' %}"
-                            >Change Password</a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item text-danger"
-                                href="{% url 'account_logout' %}"
-                            >Logout</a>
-                        </li>
-                    </ul>
+                <!-- Right elements -->
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <a
+                            class="btn btn-none dropdown-toggle text-white"
+                            id="dropdownMenuLink"
+                            data-mdb-toggle="dropdown"
+                            data-mdb-auto-close="true"
+                            aria-expanded="false"
+                        >
+                            {{ user.email }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{% url 'account_email' %}"
+                                >Change Email</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{% url 'account_change_password' %}"
+                                >Change Password</a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger"
+                                    href="{% url 'account_logout' %}"
+                                >Logout</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- Right elements -->
+                <!-- Right elements -->
+            {% else %}
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:home' %}"
+                        >Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:features' %}"
+                        >Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:pricing' %}"
+                        >Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:about' %}"
+                        >About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white"
+                            href="{% url 'intro:contact' %}"
+                        >Contact Us</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+
+                    <a type="button" class="btn btn-white px-4 me-2"
+                        href="{% url 'account_login' %}"
+                    >
+                        Signin
+                    </a>
+                    <a type="button" class="btn btn-outline-white px-4 me-2"
+                        href="{% url 'account_signup' %}"
+                    >
+                        Signup
+                    </a>
+
+                </div>
+            {% endif %}
         </div>
         <!-- Collapsible wrapper -->
-        {% else %}
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:home' %}"
-                    >Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:features' %}"
-                    >Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:pricing' %}"
-                    >Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:about' %}"
-                    >About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-black p-2 text-white"
-                        href="{% url 'intro:contact' %}"
-                    >Contact Us</a>
-                </li>
-            </ul>
-            <!-- Left links -->
-
-            <div class="d-flex align-items-center">
-
-                <a type="button" class="btn btn-white px-4 me-2"
-                    href="{% url 'account_login' %}"
-                >
-                    Signin
-                </a>
-                <a type="button" class="btn btn-outline-white px-4 me-2"
-                    href="{% url 'account_signup' %}"
-                >
-                    Signup
-                </a>
-
-            </div>
-        </div>
-        <!-- Collapsible wrapper -->
-        {% endif %}
     </div>
     <!-- Container wrapper -->
 </nav>

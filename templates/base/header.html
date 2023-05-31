@@ -3,15 +3,15 @@
     <!-- Container wrapper -->
     <div class="container">
         <!-- Navbar brand -->
-        <a class="navbar-brand text-white"
-            href="{% url 'intro:home' %}"
+        <button class="navbar-brand btn btn-none m-0 p-2 text-white"
+            hx-get="{% url 'intro:home' %}"
         >
             K-HRM
-        </a>
+        </button>
 
         <!-- Toggle button -->
-        <a
-            class="navbar-toggler text-white"
+        <button
+            class="navbar-toggler btn btn-none m-0 p-2 text-white"
             type="button"
             data-mdb-toggle="collapse"
             data-mdb-target="#navbarButtonsExample"
@@ -20,7 +20,7 @@
             aria-label="Toggle navigation"
         >
             <i class="fas fa-bars"></i>
-        </a>
+        </button>
 
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarButtonsExample">
@@ -28,32 +28,32 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:home' %}"
-                        >Dashboard</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:home' %}"
+                        >Dashboard</button>
                     </li>
                     {% if user.is_staff or user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:features' %}"
-                        >Employees</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:features' %}"
+                        >Employees</button>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:pricing' %}"
-                        >Performance</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:pricing' %}"
+                        >Performance</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:about' %}"
-                        >Reports</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:about' %}"
+                        >Reports</button>
                     </li>
                     {% if user.is_staff or user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:contact' %}"
-                        >Admin</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:contact' %}"
+                        >Admin</button>
                     </li>
                     {% endif %}
                 </ul>
@@ -62,31 +62,31 @@
                 <!-- Right elements -->
                 <div class="d-flex align-items-center">
                     <div class="dropdown">
-                        <a
-                            class="btn btn-none dropdown-toggle text-white"
+                        <button
+                            class="btn btn-none dropdown-toggle btn btn-none m-0 p-2 text-white"
                             id="dropdownMenuLink"
                             data-mdb-toggle="dropdown"
                             data-mdb-auto-close="true"
                             aria-expanded="false"
                         >
                             {{ user.email }}
-                        </a>
+                        </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <li>
-                                <a class="dropdown-item"
-                                    href="{% url 'account_email' %}"
-                                >Change Email</a>
+                                <button class="dropdown-item"
+                                    hx-get="{% url 'account_email' %}"
+                                >Change Email</button>
                             </li>
                             <li>
-                                <a class="dropdown-item"
-                                    href="{% url 'account_change_password' %}"
-                                >Change Password</a>
+                                <button class="dropdown-item"
+                                    hx-get="{% url 'account_change_password' %}"
+                                >Change Password</button>
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item text-danger"
-                                    href="{% url 'account_logout' %}"
-                                >Logout</a>
+                                <button class="dropdown-item text-danger"
+                                    hx-get="{% url 'account_logout' %}"
+                                >Logout</button>
                             </li>
                         </ul>
                     </div>
@@ -96,45 +96,45 @@
                 <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:home' %}"
-                        >Home</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:home' %}"
+                        >Home</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:features' %}"
-                        >Features</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:features' %}"
+                        >Features</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:pricing' %}"
-                        >Pricing</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:pricing' %}"
+                        >Pricing</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:about' %}"
-                        >About</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:about' %}"
+                        >About</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white"
-                            href="{% url 'intro:contact' %}"
-                        >Contact Us</a>
+                        <button class="nav-link btn btn-none m-0 p-2 text-white"
+                            hx-get="{% url 'intro:contact' %}"
+                        >Contact Us</button>
                     </li>
                 </ul>
                 <!-- Left links -->
 
                 <div class="d-flex align-items-center">
 
-                    <a type="button" class="btn btn-white px-4 me-2"
-                        href="{% url 'account_login' %}"
+                    <button type="button" class="btn btn-white px-4 me-2"
+                        hx-get="{% url 'account_login' %}"
                     >
                         Signin
-                    </a>
-                    <a type="button" class="btn btn-outline-white px-4 me-2"
-                        href="{% url 'account_signup' %}"
+                    </button>
+                    <button type="button" class="btn btn-outline-white px-4 me-2"
+                        hx-get="{% url 'account_signup' %}"
                     >
                         Signup
-                    </a>
+                    </button>
 
                 </div>
             {% endif %}

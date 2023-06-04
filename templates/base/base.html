@@ -29,7 +29,6 @@
     hx-target="body"
     hx-boost="true"
     hx-replace-url="true"
-    hx-push-url="true"
     hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}"
 >
     <div class="w-100">
@@ -66,9 +65,9 @@
     <script>
         document.querySelectorAll('.form-outline').forEach((formOutline) => {
             new mdb.Input(formOutline).init();
-        });          
+        });
     </script>
-    
+
     {% block extra_body %}
     {% endblock %}
 </body>

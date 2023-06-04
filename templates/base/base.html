@@ -21,7 +21,7 @@
     <link href="{% static 'mdb-6.3.1/css/mdb.min.css' %}" rel="stylesheet" />
     <!-- MDB -->
     <script type="text/javascript" src="{% static 'mdb-6.3.1/js/mdb.min.js' %}"></script>
-    
+
     <!-- HTMX -->
     <script src="{% static 'htmx-1.9.2/htmx.min.js' %}"></script>
 </head>
@@ -29,6 +29,8 @@
     hx-target="body"
     hx-boost="true"
     hx-replace-url="true"
+    hx-push-url="true"
+    hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}"
 >
     <div class="w-100">
         <!-- Header -->

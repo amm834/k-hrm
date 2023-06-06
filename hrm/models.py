@@ -33,7 +33,7 @@ class Payment(models.Model):
         return self.name
 
 class Employee(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=(
@@ -52,12 +52,6 @@ class Employee(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     photo = models.ImageField(upload_to='employee/')
-
-    status = models.CharField(max_length=10, choices=(
-            ('active', 'Active'),
-            ('inactive', 'Inactive'),
-        )
-    )
 
     def __str__(self):
         return self.name

@@ -62,6 +62,29 @@ class Employee(models.Model):
     def __str__(self):
         return self.name
 
+class Identity(models.Model):
+
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+
+    family_record = models.ImageField(upload_to='employee/identity/', null=True)
+
+    nrc_no = models.CharField(max_length=50, null=True)
+    nrc_front = models.ImageField(upload_to='employee/identity/')
+    nrc_back = models.ImageField(upload_to='employee/identity/')
+
+    passport_no = models.CharField(max_length=50, null=True)
+    issue_date = models.DateField()
+    expiry_date = models.DateField()
+    passport_photo = models.ImageField(upload_to='employee/identity/', null=True)
+
+    remark = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.employee
+
+    class Meta:
+        verbose_name_plural = 'Identities'
+
 class Qualification(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     qualification = models.CharField(max_length=50)

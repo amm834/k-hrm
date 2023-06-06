@@ -33,7 +33,7 @@ class Payment(models.Model):
         return self.name
 
 class Employee(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=(
@@ -49,32 +49,35 @@ class Employee(models.Model):
     phone = models.IntegerField()
     exact_address = models.TextField(blank=True, null=True)
 
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, blank=True, null=True)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE, blank=True, null=True)
+
     remark = models.TextField(blank=True, null=True)
 
-    photo = models.ImageField(upload_to='employee/')
+    photo = models.ImageField(upload_to='employee/', blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 class Identity(models.Model):
 
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
 
-    family_record = models.ImageField(upload_to='employee/identity/', null=True)
+    family_record = models.ImageField(upload_to='employee/identity/', blank=True, null=True)
 
-    nrc_no = models.CharField(max_length=50, null=True)
-    nrc_front = models.ImageField(upload_to='employee/identity/')
-    nrc_back = models.ImageField(upload_to='employee/identity/')
+    nrc_no = models.CharField(max_length=50)
+    nrc_front = models.ImageField(upload_to='employee/identity/', blank=True, null=True)
+    nrc_back = models.ImageField(upload_to='employee/identity/', blank=True, null=True)
 
-    passport_no = models.CharField(max_length=50, null=True)
-    issue_date = models.DateField()
-    expiry_date = models.DateField()
-    passport_photo = models.ImageField(upload_to='employee/identity/', null=True)
+    passport_no = models.CharField(max_length=50, blank=True, null=True)
+    issue_date = models.DateField(blank=True, null=True)
+    expiry_date = models.DateField(blank=True, null=True)
+    passport_photo = models.ImageField(upload_to='employee/identity/', blank=True, null=True)
 
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee
+        return self.employee.name
 
     class Meta:
         verbose_name_plural = 'Identities'
@@ -86,7 +89,7 @@ class Qualification(models.Model):
     year = models.IntegerField()
 
     def __str__(self):
-        return self.employee
+        return self.employee.name
 
 class Experience(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
@@ -97,7 +100,7 @@ class Experience(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee
+        return self.employee.name
 
 class Employment(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
@@ -107,4 +110,4 @@ class Employment(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee
+        return self.employee.name

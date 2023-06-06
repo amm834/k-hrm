@@ -53,12 +53,6 @@ class Employee(models.Model):
 
     photo = models.ImageField(upload_to='employee/')
 
-    status = models.CharField(max_length=10, choices=(
-            ('active', 'Active'),
-            ('inactive', 'Inactive'),
-        )
-    )
-
     def __str__(self):
         return self.name
 

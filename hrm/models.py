@@ -33,7 +33,7 @@ class Payment(models.Model):
         return self.name
 
 class Employee(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=(

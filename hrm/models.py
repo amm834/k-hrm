@@ -77,7 +77,7 @@ class Identity(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee.name
+        return self.nrc_no
 
     class Meta:
         verbose_name_plural = 'Identities'
@@ -89,7 +89,7 @@ class Qualification(models.Model):
     year = models.IntegerField()
 
     def __str__(self):
-        return self.employee.name
+        return self.qualification
 
 class Experience(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
@@ -100,7 +100,7 @@ class Experience(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee.name
+        return self.company
 
 class Employment(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
@@ -110,4 +110,4 @@ class Employment(models.Model):
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.employee.name
+        return self.position

@@ -95,8 +95,9 @@ class Experience(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     company = models.CharField(max_length=50)
     designation = models.CharField(max_length=50)
-    from_date = models.DateField()
-    to_date = models.DateField()
+    from_date = models.DateField(blank=True, null=True)
+    to_date = models.DateField(blank=True, null=True)
+    current_job = models.BooleanField(default=False)
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
@@ -106,8 +107,7 @@ class Employment(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
     from_date = models.DateField()
-    to_date = models.DateField()
     remark = models.TextField(blank=True, null=True)
 
     def __str__(self):
-        return self.position
+        return self.position.name

@@ -6,33 +6,31 @@
 
 {% block main %}
 
-<div class="container shadow-5-strong my-3 py-3">
-    <h1 class="h1 text-center">Features</h1>
-    <div class="row align-items-center px-3">
-        <div class="col-sm-5 col-md-6 lead">
-            <h1 class="h4">Advanced Performance Management and Talent Development Features</h1>
-            <h2 class="h5 text-muted">Empower Your Workforce with K-HRM's Comprehensive Tools</h2>
-            K-HRM provides advanced tools for performance management and talent development. It allows you to set goals, conduct evaluations, and create personalized development plans. You can also identify skill gaps, plan for succession, and manage learning to build a strong talent pipeline. With K-HRM, empower your workforce and drive business growth.
-        </div>
-        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-            <img decoding="async" loading="lazy" src="{% static 'intro/feat-image-2.jpg' %}" class="float-md-start w-100" alt="Feature Image 1">
-        </div>
+<h1 class="h1 text-center">Features</h1>
+<div class="row align-items-center px-3">
+    <div class="col-sm-5 col-md-6 lead">
+        <h1 class="h4">Advanced Performance Management and Talent Development Features</h1>
+        <h2 class="h5 text-muted">Empower Your Workforce with K-HRM's Comprehensive Tools</h2>
+        K-HRM provides advanced tools for performance management and talent development. It allows you to set goals, conduct evaluations, and create personalized development plans. You can also identify skill gaps, plan for succession, and manage learning to build a strong talent pipeline. With K-HRM, empower your workforce and drive business growth.
     </div>
-    <hr class="mx-4" />
-    <div class="row align-items-center px-3">
-        <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
-            <img decoding="async" loading="lazy" src="{% static 'intro/feat-image-1.jpg' %}" class="float-md-start w-100 z-depth-3" alt="Feature Image 2">
-        </div>
-        <div class="col-sm-5 col-md-6 lead">
-            K-HRM offers a wide range of features to support your HR operations. These include time and attendance tracking, leave management, payroll processing, benefits administration, employee self-service, and much more. K-HRM also provides robust reporting and analytics capabilities, enabling you to gain valuable insights into your workforce and make informed decisions based on real-time data. With K-HRM, you can improve your HR processes, reduce administrative tasks, and focus on delivering a better employee experience.
-        </div>
-        <div class="text-center mt-2">
-            <button class="btn btn-black btn-lg py-3 px-5"
-                hx-get="{% url 'account_login' %}"
-            >
-                Give it a try!
-            </button>
-        </div>
+    <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+        <img decoding="async" loading="lazy" src="{% static 'intro/feat-image-2.jpg' %}" class="float-md-start w-100" alt="Feature Image 1">
+    </div>
+</div>
+<hr class="mx-4" />
+<div class="row align-items-center px-3">
+    <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+        <img decoding="async" loading="lazy" src="{% static 'intro/feat-image-1.jpg' %}" class="float-md-start w-100 z-depth-3" alt="Feature Image 2">
+    </div>
+    <div class="col-sm-5 col-md-6 lead">
+        K-HRM offers a wide range of features to support your HR operations. These include time and attendance tracking, leave management, payroll processing, benefits administration, employee self-service, and much more. K-HRM also provides robust reporting and analytics capabilities, enabling you to gain valuable insights into your workforce and make informed decisions based on real-time data. With K-HRM, you can improve your HR processes, reduce administrative tasks, and focus on delivering a better employee experience.
+    </div>
+    <div class="text-center mt-2">
+        <button class="btn btn-black btn-lg py-3 px-5"
+            hx-get="{% url 'account_login' %}"
+        >
+            Give it a try!
+        </button>
     </div>
 </div>
 

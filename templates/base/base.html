@@ -40,17 +40,19 @@
 
         <!-- Main -->
         <main>
-            {% if messages  %}
-                {% for message in messages %}
-                <div class="alert alert-secondary alert-dismissible fade show m-0" role="alert">
-                        {{ message }}
-                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true"></span>
-                    </button>
-                </div>
-                {% endfor %}
-            {% endif %}
-            {% block main %}{% endblock main %}
+            <div class="container shadow-5-strong my-3 p-3">
+                {% if messages  %}
+                    {% for message in messages %}
+                    <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                            {{ message }}
+                        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                {% block main %}{% endblock main %}
+            </div>
         </main>
         <!-- Main -->
 

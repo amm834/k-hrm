@@ -2,4 +2,31 @@
 
 {% block main %}
     <h1>Employees</h1>
+    <p>
+        {{ employees.object_list }}
+    </p>
+
+    <nav aria-label="">
+        <ul class="pagination pagination-sm justify-content-end">
+            {% comment %} <li class="page-item">
+                <button hx-get="?page=1" class="page-link">First</button>
+            </li>
+            <li class="page-item">
+                <button hx-get="?page={{ employees.previous_page_number }}" class="page-link">Previous</button>
+            </li> {% endcomment %}
+
+            {% for page_num in employees.paginator.page_range %}
+                <li class="page-item">
+                    <button hx-get="?page={{ page_num }}" class="page-link {% if page_num == employees.number %}active{% endif %}">{{ page_num }}</button>
+                </li>
+            {% endfor %}
+
+            {% comment %} <li class="page-item">
+                <button hx-get="?page={{ employees.next_page_number }}" class="page-link">Next</button>
+            </li>
+            <li class="page-item">
+                <button hx-get="?page={{ employees.paginator.num_pages }}" class="page-link">Last</button>
+            </li> {% endcomment %}
+        </ul>
+    </nav>
 {% endblock main %}

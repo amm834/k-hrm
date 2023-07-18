@@ -9,7 +9,7 @@ def employee_list(request):
     context = {}
 
     employee_list = models.Employee.objects.all()
-    paginated_employee_list = Paginator(employee_list, 1)
+    paginated_employee_list = Paginator(employee_list, 100)
 
     page_number = request.GET.get("page")
     context['employees'] = paginated_employee_list.get_page(page_number)

@@ -1,17 +1,21 @@
 <nav>
     <ul class="pagination pagination-sm justify-content-end">
-        <form id="search" class="page-item mx-2">
+        <form id="search" class="page-item mx-2" hx-get="{{ request.path }}">
             <div class="row">
                 <div class="input-group rounded col">
                     <input type="search" name="search_query" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" value="{% if request.GET.search_query %}{{ request.GET.search_query }}{% endif %}" />
                 </div>
 
                 <div class="input-group rounded col">
-                    <select class="form-select" name="page_size" onchange="this.form.submit()">
+                    <select class="form-select" name="page_size">
                         <option value="100" {% if request.GET.page_size == '100' %}selected{% endif %}>100</option>
                         <option value="200" {% if request.GET.page_size == '200' %}selected{% endif %}>200</option>
                         <option value="300" {% if request.GET.page_size == '300' %}selected{% endif %}>300</option>
                     </select>
+                </div>
+
+                <div class="input-group rounded col">
+                    <button type="submit" class="btn btn-black">Go</button>
                 </div>
             </div>
         </form>

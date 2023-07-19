@@ -24,7 +24,11 @@
                     <td>{{ employee.user.email }}</td>
                     <td>{{ employee.phone }}</td>
                     <td>{{ employee.gender }} </td>
-                    <td>{{ employee.position }} - {{ employee.position.team }}</td>
+                    <td>
+                        {% if employee.position != None%}
+                            {{ employee.position }} - {{ employee.position.team }}
+                        {% endif %}
+                    </td>
                     <td>{{ employee.dob }}</td>
                     <td>{{ employee.remark }}</td>
                 </tr>

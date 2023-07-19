@@ -23,6 +23,10 @@ class EmployeeListView(ListView):
         except ValueError:
             return None
 
+class EmployeeDetailView(DetailView):
+    model = models.Employee
+    lookup_field = 'id'
+    template_name = 'hrm/employee_detail.html'
 
 # @login_required
 # def employee_list(request):

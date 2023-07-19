@@ -5,5 +5,5 @@ from django.contrib.auth.decorators import login_required
 
 app_name = "hrm"
 urlpatterns = [
-    path('employees', login_required(views.EmployeeListView.as_view()), name="employee_list")
+    path('employee_list', login_required(views.EmployeeListView.as_view()), name="employee_list")
 ]

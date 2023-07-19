@@ -2,10 +2,20 @@ from vanilla import ListView, DetailView
 
 from hrm import models
 
+def search(obj):
+    search_query = obj.request.GET['search_query'] if 'search_query' in obj.request.GET else None
+    obj_list = obj.model.objects.all()
+    if search_query:
+        obj_list = obj.model.objects.filter(name__icontains=search_query)
+    return obj_list
+
 class EmployeeListView(ListView):
     model = models.Employee
     template_name = 'hrm/employee_list.html'
     paginate_by = 100
+
+    def get_queryset(self):
+        return search(self)
 
     def get_paginate_by(self):
         try:

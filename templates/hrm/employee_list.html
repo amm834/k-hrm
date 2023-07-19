@@ -2,7 +2,7 @@
 
 {% block main %}
     <h1>Employees</h1>
-    <p>
+    <div class="table-responsive">
         {% include 'base/search_and_paginate.html' %}
         <table class="table align-middle mb-0 bg-white">
             <thead class="bg-light">
@@ -36,5 +36,5 @@
                 {% endfor %}
             </tbody>
         </table>
-    </p>
+    </div>
 {% endblock main %}

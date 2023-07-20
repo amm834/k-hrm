@@ -11,6 +11,7 @@
     <th>position</th>
     <th>dob</th>
     <th>remark</th>
+    <th>action</th>
 {% endblock thead %}
 
 {% block tbody %}
@@ -28,6 +29,9 @@
             </td>
             <td>{{ employee.dob }}</td>
             <td>{{ employee.remark }}</td>
+            <td>
+                <button class="btn btn-outline-black" hx-get="{% url 'hrm:employee_detail' employee.id %}">Details</button>
+            </td>
         </tr>
     {% endfor %}
 {% endblock tbody %}

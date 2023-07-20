@@ -14,6 +14,11 @@
                     <div class="card mb-4">
                         <div class="card-body text-center">
                             <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{% static 'hrm/profile_photo.jpg' %}{% endif %}" style="width: 150px;">
+                            <h5 class="my-3">{{ employee.name }}</h5>
+                            {% if employee.position != None%}
+                                <p class="text-muted mb-1">{{ employee.position }} - {{ employee.position.team }}</p>
+                                <p class="text-muted mb-4">{{ employee.position.team.department }}</p>
+                            {% endif %}
                             <div class="d-flex justify-content-center mb-2 my-3">
                                 <button type="button" class="btn btn-outline-black">Edit</button>
                             </div>
@@ -23,24 +28,32 @@
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fas fa-globe fa-lg text-warning"></i>
-                                    <p class="mb-0"></p>
+                                    NRC
+                                    <p class="mb-0">{{ employee.identity.nrc_no }}</p>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
+                                    Payment
+                                    {% if employee.payment != None%}
+                                        <p class="mb-0">{{ employee.payment }}</p>
+                                    {% endif %}
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                                    <p class="mb-0">@mdbootstrap</p>
+                                    Position
+                                    {% if employee.position != None%}
+                                        <p class="mb-0">{{ employee.position }}</p>
+                                    {% endif %}
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
+                                    Team
+                                    {% if employee.position != None%}
+                                        <p class="mb-0">{{ employee.position.team }}</p>
+                                    {% endif %}
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                                    <p class="mb-0">mdbootstrap</p>
+                                    Department
+                                    {% if employee.position != None%}
+                                        <p class="mb-0">{{ employee.position.team.department }}</p>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </div>
@@ -55,6 +68,48 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">{{ employee.name }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Gender</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ employee.gender }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Distinct Mark</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {% if employee.distinct_mark != None%}
+                                        <p class="text-muted mb-0">{{ employee.distinct_mark }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Father</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {% if employee.father != None%}
+                                        <p class="text-muted mb-0">{{ employee.father }}</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Mother</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    {% if employee.mother != None%}
+                                        <p class="text-muted mb-0">{{ employee.mother }}</p>
+                                    {% endif %}
                                 </div>
                             </div>
                             <hr>
@@ -91,6 +146,15 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <p class="text-muted mb-0">{{ employee.exact_address }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Remark</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ employee.remark }}</p>
                                 </div>
                             </div>
                         </div>

@@ -8,7 +8,7 @@
 
     <section>
         <div class="container py-5">
-    
+
             <div class="row">
                 <div class="col-lg-4">
 
@@ -129,16 +129,16 @@
                                     NRC No
                                     <p class="mb-0">{{ employee.identity.nrc_no }}</p>
                                 </li>
-                                
+
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     NRC Front
-                                    
+
                                     {% if employee.identity.nrc_front %}
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcFrontModal">
                                             See
                                         </button>
-                                        
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="nrcFrontModal" tabindex="-1" aria-labelledby="nrcFrontModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
@@ -163,13 +163,13 @@
 
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     NRC Back
-                                    
+
                                     {% if employee.identity.nrc_back %}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcBackModal">
                                         See
                                     </button>
-                                    
+
                                     <!-- Modal -->
                                     <div class="modal fade" id="nrcBackModal" tabindex="-1" aria-labelledby="nrcBackModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -177,7 +177,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="nrcBackModalLabel">NRC Back</h5>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                </div>      
+                                                </div>
                                                 <div class="modal-body">
                                                     <img
                                                         src="{{ employee.identity.nrc_back.url }}"
@@ -194,13 +194,13 @@
 
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     Family Record
-                                    
+
                                     {% if employee.identity.family_record %}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#familyRecordModal">
                                         See
                                     </button>
-                                    
+
                                     <!-- Modal -->
                                     <div class="modal fade" id="familyRecordModal" tabindex="-1" aria-labelledby="familyRecordModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -240,13 +240,13 @@
 
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     Passport
-                                    
+
                                     {% if employee.identity.passport_photo %}
                                     <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#passportModal">
                                         See
                                     </button>
-                                    
+
                                     <!-- Modal -->
                                     <div class="modal fade" id="passportModal" tabindex="-1" aria-labelledby="passportModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -254,7 +254,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="passportModalLabel">Passport</h5>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                </div>      
+                                                </div>
                                                 <div class="modal-body">
                                                     <img
                                                         src="{{ employee.identity.passport_photo.url }}"
@@ -340,7 +340,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 

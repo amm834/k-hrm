@@ -11,9 +11,9 @@ class EmployeeListView(ListView):
 
     def get_queryset(self):
         search_query = self.request.GET['search_query'] if 'search_query' in self.request.GET else None
-        employee_list = self.model.objects.all()
+        employee_list = self.model.objects.filter(Q(user__is_active=True))
         if search_query:
-            employee_list = self.model.objects.filter(Q(id__icontains=search_query) | Q(name__icontains=search_query) | Q(user__email__icontains=search_query) | Q(phone__icontains=search_query) | Q(position__name__icontains=search_query) | Q(position__team__name__icontains=search_query) | Q(position__team__department__name__icontains=search_query))
+            employee_list = employee_list.filter(Q(id__icontains=search_query) | Q(name__icontains=search_query) | Q(user__email__icontains=search_query) | Q(phone__icontains=search_query) | Q(position__name__icontains=search_query) | Q(position__team__name__icontains=search_query) | Q(position__team__department__name__icontains=search_query))
         return employee_list
 
     def get_paginate_by(self):

@@ -3,17 +3,19 @@ from django.db.models import Q
 from vanilla import ListView, DetailView
 
 from hrm import models
+from hrm.forms import SearchForm
 
 class EmployeeListView(ListView):
     model = models.Employee
+    form_class = SearchForm
     template_name = 'hrm/employee_list.html'
     paginate_by = 100
 
     def get_queryset(self):
-        search_query = self.request.GET['search_query'] if 'search_query' in self.request.GET else None
+        search_form = self.form_class(self.request.GET)
         employee_list = self.model.objects.filter(Q(user__is_active=True))
-        if search_query:
-            employee_list = employee_list.filter(Q(id__icontains=search_query) | Q(name__icontains=search_query) | Q(user__email__icontains=search_query) | Q(phone__icontains=search_query) | Q(position__name__icontains=search_query) | Q(position__team__name__icontains=search_query) | Q(position__team__department__name__icontains=search_query))
+        if search_form.is_valid():
+            employee_list = employee_list.filter(Q(id__icontains=search_form.cleaned_data['search_query']) | Q(name__icontains=search_form.cleaned_data['search_query']) | Q(user__email__icontains=search_form.cleaned_data['search_query']) | Q(phone__icontains=search_form.cleaned_data['search_query']) | Q(position__name__icontains=search_form.cleaned_data['search_query']) | Q(position__team__name__icontains=search_form.cleaned_data['search_query']) | Q(position__team__department__name__icontains=search_form.cleaned_data['search_query']))
         return employee_list
 
     def get_paginate_by(self):

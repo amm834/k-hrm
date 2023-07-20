@@ -36,7 +36,7 @@
             <td>{{ employee.dob }}</td>
             <td>{{ employee.remark }}</td>
             <td>
-                <button class="btn btn-outline-black" hx-get="{% url 'hrm:employee_detail' employee.id %}">Details</button>
+                <button class="btn btn-tertiary text-black" hx-get="{% url 'hrm:employee_detail' employee.id %}">View</button>
             </td>
         </tr>
     {% endfor %}

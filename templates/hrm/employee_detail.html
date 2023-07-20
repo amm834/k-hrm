@@ -16,9 +16,6 @@
                         <div class="card-body text-center">
                             <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{% static 'hrm/profile_photo.jpg' %}{% endif %}" style="width: 150px;">
                             <h5 class="my-3">{{ employee.name }}</h5>
-                            <div class="d-flex justify-content-center mb-2 my-3">
-                                <button hx-get="{% url 'hrm:employee_update' employee.id %}" type="button" class="btn btn-outline-black">Edit</button>
-                            </div>
                         </div>
                     </div>
 
@@ -51,8 +48,9 @@
 
                 <div class="col-lg-4">
                     <div class="card my-2 p-3">
-                        <div class="card-header">
-                            <h3 class="text-center">Employee</h3>
+                        <div class="card-header d-flex justify-content-between">
+                            <h3>Employee</h3>
+                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
@@ -119,8 +117,9 @@
 
                 <div class="col-lg-4">
                     <div class="card my-2 p-3">
-                        <div class="card-header">
-                            <h3 class="text-center">Identity</h3>
+                        <div class="card-header d-flex justify-content-between">
+                            <h3>Identity</h3>
+                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
@@ -208,7 +207,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="familyRecordModalLabel">Family Record</h5>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                </div>      
+                                                </div>
                                                 <div class="modal-body">
                                                     <img
                                                         src="{{ employee.identity.family_record.url }}"
@@ -283,8 +282,9 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="text-center">Experience</h3>
+                        <div class="card-header d-flex justify-content-between">
+                            <h3>Experience</h3>
+                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered">
@@ -314,8 +314,9 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="text-center">Qualification</h3>
+                        <div class="card-header d-flex justify-content-between">
+                            <h3>Qualification</h3>
+                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered">

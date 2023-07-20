@@ -1,14 +1,13 @@
 from django.db.models import Q
 
-from vanilla import ListView, DetailView
+from vanilla import ListView, DetailView, UpdateView
 
 from hrm import models
-from hrm.forms import SearchForm
+from hrm import forms
 
 class EmployeeListView(ListView):
     model = models.Employee
-    form_class = SearchForm
-    template_name = 'hrm/employee_list.html'
+    form_class = forms.SearchForm
     paginate_by = 100
 
     def get_queryset(self):
@@ -36,7 +35,11 @@ class EmployeeListView(ListView):
 class EmployeeDetailView(DetailView):
     model = models.Employee
     lookup_field = 'id'
-    template_name = 'hrm/employee_detail.html'
+    
+class EmployeeUpdateView(UpdateView):
+    model = models.Employee
+    lookup_field = 'id'
+    form_class = forms.EmployeeForm
 
 # @login_required
 # def employee_list(request):

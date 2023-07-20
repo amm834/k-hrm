@@ -39,5 +39,8 @@
                 <button class="btn btn-tertiary text-black" hx-get="{% url 'hrm:employee_detail' employee.id %}">View</button>
             </td>
         </tr>
+    {% empty %}
+        <h3>No data.</h3>
     {% endfor %}
+
 {% endblock tbody %}

@@ -11,39 +11,20 @@
     
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card mb-4">
+
+                    <div class="card my-2 p-3">
                         <div class="card-body text-center">
                             <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{% static 'hrm/profile_photo.jpg' %}{% endif %}" style="width: 150px;">
                             <h5 class="my-3">{{ employee.name }}</h5>
-                            {% if employee.position != None%}
-                                <p class="text-muted mb-1">{{ employee.position }} - {{ employee.position.team }}</p>
-                                <p class="text-muted mb-4">{{ employee.position.team.department }}</p>
-                            {% endif %}
                             <div class="d-flex justify-content-center mb-2 my-3">
-                                <button type="button" class="btn btn-outline-black">Edit</button>
+                                <button hx-get="{% url 'hrm:employee_update' employee.id %}" type="button" class="btn btn-outline-black">Edit</button>
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-4 mb-lg-0">
-                        <div class="card-header">
-                            <h3 class="text-center">Information</h3>
-                        </div>
+
+                    <div class="card my-2 p-3">
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    ID
-                                    <p class="mb-0">{{ employee.id }}</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    NRC
-                                    <p class="mb-0">{{ employee.identity.nrc_no }}</p>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Payment
-                                    {% if employee.payment != None%}
-                                        <p class="mb-0">{{ employee.payment }}</p>
-                                    {% endif %}
-                                </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                     Position
                                     {% if employee.position != None%}
@@ -65,150 +46,301 @@
                             </ul>
                         </div>
                     </div>
+
                 </div>
-                <div class="col-lg-8">
-                    <div class="card mb-4">
+
+                <div class="col-lg-4">
+                    <div class="card my-2 p-3">
                         <div class="card-header">
-                            <h3 class="text-center">About</h3>
+                            <h3 class="text-center">Employee</h3>
                         </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Full Name</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.name }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Gender</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.gender }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Distinct Mark</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    {% if employee.distinct_mark != None%}
-                                        <p class="text-muted mb-0">{{ employee.distinct_mark }}</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Father</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    {% if employee.father != None%}
-                                        <p class="text-muted mb-0">{{ employee.father }}</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Mother</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    {% if employee.mother != None%}
-                                        <p class="text-muted mb-0">{{ employee.mother }}</p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Email</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.user.email }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Phone</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.phone }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Date of Birth</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.dob }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Address</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.exact_address }}</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="mb-0">Remark</p>
-                                </div>
-                                <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ employee.remark }}</p>
-                                </div>
-                            </div>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3">
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    ID
+                                    <p class="mb-0">{{ employee.id }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Name
+                                    <p class="mb-0">{{ employee.name }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Gender
+                                    <p class="mb-0">{{ employee.gender }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Birthday
+                                    <p class="mb-0">{{ employee.dob }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Distinct Mark
+                                    <p class="mb-0">{% if employee.distinct_mark != None %}{{ employee.distinct_mark }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Father
+                                    <p class="mb-0">{% if employee.father != None %}{{ employee.mother }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Mother
+                                    <p class="mb-0">{% if employee.mother != None %}{{ employee.mother }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Phone
+                                    <p class="mb-0">{{ employee.phone }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Exact Address
+                                    <p class="mb-0">{{ employee.exact_address }}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Payment
+                                    <p class="mb-0">{% if employee.payment != None %}{{ employee.payment }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Position
+                                    <p class="mb-0">{% if employee.position != None %}{{ employee.position }}{% endif %}</p>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-header">
-                                    <h3 class="text-center">Experience</h3>
-                                </div>
-                                <div class="card-body">
-                                    {% for experience in employee.experience_set.all %}
-                                        <div class="flex-grow-1 ms-3">
-                                            <p class="mb-1"><span class="text-muted">Position</span> - {{ experience.designation }}</p>
-                                            <p class="mb-1"><span class="text-muted">Company</span> - {{ experience.company }}</p>
-                                            <p class="mb-1"><span class="text-muted">From</span> - {{ experience.from_date }}</p>
-                                            <p class="mb-1"><span class="text-muted">To</span> - {% if experience.current_job %}Current{% else %}{{ experience.to_date }}{% endif %}</p>
-                                            <p class="mb-1"><span class="text-muted">Remark</span> - {{ experience.remark }}</p>
-                                        </div>
-                                        <hr>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card my-2 p-3">
+                        <div class="card-header">
+                            <h3 class="text-center">Identity</h3>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card mb-4 mb-md-0">
-                                <div class="card-header">
-                                    <h3 class="text-center">Qualification</h3>
-                                </div>
-                                <div class="card-body">
-                                    {% for qualification in employee.qualification_set.all %}
-                                        <div class="flex-grow-1 ms-3">
-                                            <p class="mb-1"><span class="text-muted">Qualification</span> - {{ qualification.qualification }}</p>
-                                            <p class="mb-1"><span class="text-muted">Institude</span> - {{ qualification.institute }}</p>
-                                            <p class="mb-1"><span class="text-muted">Year</span> - {{ qualification.Year }}</p>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush rounded-3">
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    NRC No
+                                    <p class="mb-0">{{ employee.identity.nrc_no }}</p>
+                                </li>
+                                
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    NRC Front
+                                    
+                                    {% if employee.identity.nrc_front %}
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcFrontModal">
+                                            See
+                                        </button>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="nrcFrontModal" tabindex="-1" aria-labelledby="nrcFrontModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="nrcFrontModalLabel">NRC Front</h5>
+                                                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                    </div>      
+                                                    <div class="modal-body">
+                                                        <img
+                                                            src="{{ employee.identity.nrc_front.url }}"
+                                                            class="img-thumbnail"
+                                                            alt="{{ employee.name }}'s nrc front"
+                                                            width="100%"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <hr>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                                    {% endif %}
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    NRC Back
+                                    
+                                    {% if employee.identity.nrc_back %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcBackModal">
+                                        See
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="nrcBackModal" tabindex="-1" aria-labelledby="nrcBackModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="nrcBackModalLabel">NRC Back</h5>
+                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                </div>      
+                                                <div class="modal-body">
+                                                    <img
+                                                        src="{{ employee.identity.nrc_back.url }}"
+                                                        class="img-thumbnail"
+                                                        alt="{{ employee.name }}'s nrc back"
+                                                        width="100%"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Family Record
+                                    
+                                    {% if employee.identity.family_record %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#familyRecordModal">
+                                        See
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="familyRecordModal" tabindex="-1" aria-labelledby="familyRecordModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="familyRecordModalLabel">Family Record</h5>
+                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                </div>      
+                                                <div class="modal-body">
+                                                    <img
+                                                        src="{{ employee.identity.family_record.url }}"
+                                                        class="img-thumbnail"
+                                                        alt="{{ employee.name }}'s nrc front"
+                                                        width="100%"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Passport No
+                                    <p class="mb-0">{% if employee.identity.passport_no != None %}{{ employee.identity.passport_no }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Issue Date
+                                    <p class="mb-0">{% if employee.identity.issue_date != None %}{{ employee.identity.issue_date }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Expiry Date
+                                    <p class="mb-0">{% if employee.identity.expiry_date != None %}{{ employee.identity.expiry_date }}{% endif %}</p>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Passport
+                                    
+                                    {% if employee.identity.passport_photo %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#passportModal">
+                                        See
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="passportModal" tabindex="-1" aria-labelledby="passportModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="passportModalLabel">Passport</h5>
+                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                                </div>      
+                                                <div class="modal-body">
+                                                    <img
+                                                        src="{{ employee.identity.passport_photo.url }}"
+                                                        class="img-thumbnail"
+                                                        alt="{{ employee.name }}'s nrc front"
+                                                        width="100%"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                    Remark
+                                    <p class="mb-0">{{ employee.identity.remark }}</p>
+                                </li>
+
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card my-2 p-3">
+                        <div class="card-header">
+                            <h3 class="text-center">Experience</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">From</th>
+                                        <th scope="col">To</th>
+                                        <th scope="col">Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for experience in employee.experience_set.all %}
+                                        <tr>
+                                            <td>{{ experience.designation }}</td>
+                                            <td>{{ experience.company }}</td>
+                                            <td>{% if experience.from_date != None%}{{ experience.from_date }}{% endif %}</td>
+                                            <td>{% if experience.current_job %}Current{% else %}{% if experience.to_date != None%}{{ experience.to_date }}{% endif %}{% endif %}</td>
+                                            <td>{{ experience.remark }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card my-2 p-3">
+                        <div class="card-header">
+                            <h3 class="text-center">Qualification</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Qualification</th>
+                                        <th scope="col">Institude</th>
+                                        <th scope="col">Year</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for qualification in employee.qualification_set.all %}
+                                        <tr>
+                                            <td>{{ qualification.qualification }}</td>
+                                            <td>{{ qualification.institute }}</td>
+                                            <td>{{ qualification.year }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 

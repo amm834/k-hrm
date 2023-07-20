@@ -1,13 +1,8 @@
+from django.db.models import Q
+
 from vanilla import ListView, DetailView
 
 from hrm import models
-
-def search(obj):
-    search_query = obj.request.GET['search_query'] if 'search_query' in obj.request.GET else None
-    obj_list = obj.model.objects.all()
-    if search_query:
-        obj_list = obj.model.objects.filter(name__icontains=search_query)
-    return obj_list
 
 class EmployeeListView(ListView):
     model = models.Employee
@@ -15,7 +10,11 @@ class EmployeeListView(ListView):
     paginate_by = 100
 
     def get_queryset(self):
-        return search(self)
+        search_query = self.request.GET['search_query'] if 'search_query' in self.request.GET else None
+        employee_list = self.model.objects.all()
+        if search_query:
+            employee_list = self.model.objects.filter(Q(id__icontains=search_query) | Q(name__icontains=search_query) | Q(user__email__icontains=search_query) | Q(phone__icontains=search_query) | Q(position__name__icontains=search_query) | Q(position__team__name__icontains=search_query) | Q(position__team__department__name__icontains=search_query))
+        return employee_list
 
     def get_paginate_by(self):
         try:

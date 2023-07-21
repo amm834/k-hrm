@@ -144,6 +144,10 @@ LANGUAGE_CODE = 'en-gb'
 
 TIME_ZONE = 'Asia/Yangon'
 
+DATE_FORMAT = "Y-m-d"
+
+USE_L10N = False
+
 USE_I18N = True
 
 USE_TZ = True

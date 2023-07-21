@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.db.models import Q
 
 from vanilla import ListView, DetailView, UpdateView
@@ -48,6 +49,9 @@ class EmployeeUpdateView(UpdateView):
     model = models.Employee
     lookup_field = 'id'
     form_class = forms.EmployeeForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'id': self.object.id})
 
     def get_queryset(self):
         if not self.request.user.is_superuser or not self.request.user.is_staff:

@@ -3,5 +3,17 @@
 {% block title %}{{ employee.name }}{% endblock title %}
 
 {% block main %}
-    {{ form.as_p }}
+    <section class="m-3 p-3">
+        <form hx-post="{% url 'hrm:employee_update' employee.id %}">
+            {% csrf_token %}
+            <div class="block p-1">
+                <h3 class="text-center">Employee</h3>
+                <div class="d-flex justify-content-end m-3">
+                    <button hx-get="{% url 'hrm:employee_detail' employee.id %}" type="button" class="btn btn-sm btn-outline-black m-1" data-mdb-ripple-color="black">Cancel</button>
+                    <button type="submit" class="btn btn-black m-1" data-mdb-ripple-color="black">Save</button>
+                </div>
+                {{ form.as_p }}
+            </div>
+        </form>
+    </section>
 {% endblock main %}

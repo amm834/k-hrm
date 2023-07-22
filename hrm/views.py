@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.db.models import Q
 
-from vanilla import ListView, DetailView, UpdateView
+from vanilla import ListView, CreateView, DetailView, UpdateView
 
 from hrm import models
 from hrm import forms
@@ -39,7 +39,7 @@ class EmployeeListView(ListView):
 
 class EmployeeDetailView(DetailView):
     model = models.Employee
-    lookup_field = 'id'
+    lookup_url_kwarg = 'employee_id'
 
     def get_queryset(self):
         if not self.request.user.is_superuser or not self.request.user.is_staff:
@@ -48,13 +48,38 @@ class EmployeeDetailView(DetailView):
 
 class EmployeeUpdateView(UpdateView):
     model = models.Employee
-    lookup_field = 'id'
+    lookup_url_kwarg = 'employee_id'
     form_class = forms.EmployeeForm
 
     def get_success_url(self):
-        return reverse_lazy('hrm:employee_detail', kwargs={'id': self.object.id})
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.id})
 
     def get_queryset(self):
         if not self.request.user.is_superuser or not self.request.user.is_staff:
             return self.model.objects.filter(Q(user__id__exact=self.request.user.id))
+        return self.model
+
+class IdentityCreateView(CreateView):
+    model = models.Identity
+    form_class = forms.IdentityForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
+        return self.model
+
+class IdentityUpdateView(UpdateView):
+    model = models.Identity
+    lookup_url_kwarg = 'identity_id'
+    form_class = forms.IdentityForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
         return self.model

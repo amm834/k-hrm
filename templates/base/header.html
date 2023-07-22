@@ -32,13 +32,11 @@
                             hx-get="{% url 'intro:home' %}"
                         >Dashboard</button>
                     </li>
-                    {% if user.is_staff or user.is_superuser %}
                     <li class="nav-item">
                         <button class="nav-link btn btn-none m-0 p-2 text-white"
                             hx-get="{% url 'hrm:employee_list' %}"
                         >Employees</button>
                     </li>
-                    {% endif %}
                     <li class="nav-item">
                         <button class="nav-link btn btn-none m-0 p-2 text-white"
                             hx-get="{% url 'intro:pricing' %}"

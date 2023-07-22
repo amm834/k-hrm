@@ -1,0 +1,145 @@
+{% if form.instance.id %}
+    <form hx-post="{% url 'hrm:identity_update' identity.employee.id identity.id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card my-2 p-3">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Identity</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' identity.employee.id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+
+                        <select name="employee" required id="id_employee" hidden>
+                            <option value="{{ identity.employee.id }}" selected>{{ identity.employee.name }}</option>
+                        </select>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_no">NRC No</label>
+                            <input type="text" name="nrc_no" value="{{ identity.nrc_no }}" maxlength="50" required id="id_nrc_no">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_front">NRC Front</label>
+                            <input type="file" name="nrc_front" accept="image/*" id="id_nrc_front">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_back">NRC Back</label>
+                        <input type="file" name="nrc_back" accept="image/*" id="id_nrc_back">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_family_record">Family Record</label>
+                            <input type="file" name="family_record" accept="image/*" id="id_family_record">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_passport_no">Passport No</label>
+                            <input type="text" name="passport_no" value="{% if identity.passport_no %}{{ identity.passport_no }}{% endif %}" maxlength="50" id="id_passport_no">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_issue_date">Issue Date</label>
+                            <input type="date" value="{{ identity.issue_date|date }}" name="issue_date" id="id_issue_date">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_expiry_date">Expiry Date</label>
+                            <input type="date" value="{{ identity.expiry_date|date }}" name="expiry_date" id="id_expiry_date">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_passport_photo">Passport</label>
+                            <input type="file" name="passport_photo" accept="image/*" id="id_passport_photo">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_remark">Remark</label>
+                            <textarea name="remark" id="id_remark">{{ identity.remark }}</textarea>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+{% else %}
+    <form hx-post="{% url 'hrm:identity_create' view.kwargs.employee_id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card my-2 p-3">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Identity</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' view.kwargs.employee_id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush rounded-3">
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+
+                        <select name="employee" required id="id_employee" hidden>
+                            <option value="{{ view.kwargs.employee_id }}" selected></option>
+                        </select>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_no">NRC No</label>
+                            <input type="text" name="nrc_no" maxlength="50" required id="id_nrc_no">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_front">NRC Front</label>
+                            <input type="file" name="nrc_front" accept="image/*" id="id_nrc_front">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_nrc_back">NRC Back</label>
+                        <input type="file" name="nrc_back" accept="image/*" id="id_nrc_back">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_family_record">Family Record</label>
+                            <input type="file" name="family_record" accept="image/*" id="id_family_record">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_passport_no">Passport No</label>
+                            <input type="text" name="passport_no" maxlength="50" id="id_passport_no">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_issue_date">Issue Date</label>
+                            <input type="date" name="issue_date" id="id_issue_date">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_expiry_date">Expiry Date</label>
+                            <input type="date" name="expiry_date" id="id_expiry_date">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_passport_photo">Passport</label>
+                            <input type="file" name="passport_photo" accept="image/*" id="id_passport_photo">
+                        </li>
+
+                        <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <label for="id_remark">Remark</label>
+                            <textarea name="remark" id="id_remark"></textarea>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endif %}

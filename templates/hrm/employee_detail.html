@@ -159,11 +159,11 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div id="identity" class="col-lg-4">
                     <div class="card my-2 p-3">
                         <div class="card-header d-flex justify-content-between">
                             <h3>Identity</h3>
-                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
+                            <button hx-target="#identity" hx-push-url="false" hx-get="{% if employee.identity %}{% url 'hrm:identity_update' employee.id employee.identity.id %}{% else %}{% url 'hrm:identity_create' employee.id %}{% endif %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush rounded-3">

@@ -5,256 +5,191 @@
 {% block title %}{{ employee.name }}{% endblock title %}
 
 {% block main %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
 
-    <section>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-4">
-
-                    <div class="card my-2">
-                        <div class="card-body text-center">
-                            <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{% static 'hrm/profile_photo.jpg' %}{% endif %}" style="width: 150px;">
-                            <h5 class="my-3">{{ employee.name }}</h5>
-                            <p>{{ employee.user.email }}</p>
-                        </div>
-                    </div>
-
-                    <div class="card my-2 p-3">
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Position
-                                    {% if employee.position%}
-                                        <p class="mb-0">{{ employee.position }}</p>
-                                    {% endif %}
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Team
-                                    {% if employee.position%}
-                                        <p class="mb-0">{{ employee.position.team }}</p>
-                                    {% endif %}
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Department
-                                    {% if employee.position%}
-                                        <p class="mb-0">{{ employee.position.team.department }}</p>
-                                    {% endif %}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div id="employee" class="col-lg-4">
-                    <div class="card my-2 p-3">
-                        <div class="card-header d-flex justify-content-between">
-                            <h3>Employee</h3>
-                            <div class="justify-self-end">
-                                <button hx-target="#employee" hx-push-url="false" hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
-                            </div>
-                        </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    ID
-                                    <p class="mb-0">{{ employee.id }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Email
-                                    <p class="mb-0">{{ employee.user.email }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Photo
-
-                                    {% if employee.photo %}
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#employeePhotoModal">
-                                            View
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="employeePhotoModal" tabindex="-1" aria-labelledby="employeePhotoModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="employeePhotoModalLabel">Photo</h5>
-                                                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img
-                                                            src="{{ employee.photo.url }}"
-                                                            class="img-thumbnail"
-                                                            alt="{{ employee.name }}'s photo"
-                                                            width="100%"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Name
-                                    <p class="mb-0">{{ employee.name }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Gender
-                                    <p class="mb-0">{{ employee.gender }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Birthday
-                                    <p class="mb-0">{{ employee.dob }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Distinct Mark
-                                    <p class="mb-0">{% if employee.distinct_mark %}{{ employee.distinct_mark }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Father
-                                    <p class="mb-0">{% if employee.father %}{{ employee.mother }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Mother
-                                    <p class="mb-0">{% if employee.mother %}{{ employee.mother }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Phone
-                                    <p class="mb-0">{{ employee.phone }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Exact Address
-                                    <p class="mb-0">{{ employee.exact_address }}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Payment
-                                    <p class="mb-0">{% if employee.payment %}{{ employee.payment }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Position
-                                    <p class="mb-0">{% if employee.position %}{{ employee.position }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Remark
-                                    <p class="mb-0">{% if employee.remark %}{{ employee.remark }}{% endif %}</p>
-                                </li>
-
-                            </ul>
-                        </div>
+                <div class="card my-2">
+                    <div class="card-body text-center">
+                        <img src="{% if employee.photo %}{{ employee.photo.url }}{% else %}{% static 'hrm/profile_photo.jpg' %}{% endif %}" style="width: 150px;">
+                        <h5 class="my-3">{{ employee.name }}</h5>
+                        <p>{{ employee.user.email }}</p>
                     </div>
                 </div>
 
-                <div id="identity" class="col-lg-4">
-                    <div class="card my-2 p-3">
-                        <div class="card-header d-flex justify-content-between">
-                            <h3>Identity</h3>
-                            <button hx-target="#identity" hx-push-url="false" hx-get="{% if employee.identity %}{% url 'hrm:identity_update' employee.id employee.identity.id %}{% else %}{% url 'hrm:identity_create' employee.id %}{% endif %}" class="btn btn-tertiary text-black">Edit</button>
+                <div class="card my-2 p-3">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Position
+                                {% if employee.position%}
+                                    <p class="mb-0">{{ employee.position }}</p>
+                                {% endif %}
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Team
+                                {% if employee.position%}
+                                    <p class="mb-0">{{ employee.position.team }}</p>
+                                {% endif %}
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Department
+                                {% if employee.position%}
+                                    <p class="mb-0">{{ employee.position.team.department }}</p>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="employee" class="col-lg-4">
+                <div class="card my-2 p-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Employee</h3>
+                        <div class="justify-self-end">
+                            <button hx-target="#employee" hx-push-url="false" hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
                         </div>
-                        <div class="card-body p-0">
-                            <ul class="list-group list-group-flush rounded-3">
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    NRC No
-                                    <p class="mb-0">{{ employee.identity.nrc_no }}</p>
-                                </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                ID
+                                <p class="mb-0">{{ employee.id }}</p>
+                            </li>
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    NRC Front
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Email
+                                <p class="mb-0">{{ employee.user.email }}</p>
+                            </li>
 
-                                    {% if employee.identity.nrc_front %}
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcFrontModal">
-                                            View
-                                        </button>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Photo
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="nrcFrontModal" tabindex="-1" aria-labelledby="nrcFrontModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="nrcFrontModalLabel">NRC Front</h5>
-                                                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img
-                                                            src="{{ employee.identity.nrc_front.url }}"
-                                                            class="img-thumbnail"
-                                                            alt="{{ employee.name }}'s nrc front"
-                                                            width="100%"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    NRC Back
-
-                                    {% if employee.identity.nrc_back %}
+                                {% if employee.photo %}
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcBackModal">
+                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#employeePhotoModal">
                                         View
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="nrcBackModal" tabindex="-1" aria-labelledby="nrcBackModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="employeePhotoModal" tabindex="-1" aria-labelledby="employeePhotoModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="nrcBackModalLabel">NRC Back</h5>
+                                                    <h5 class="modal-title" id="employeePhotoModalLabel">Photo</h5>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <img
-                                                        src="{{ employee.identity.nrc_back.url }}"
+                                                        src="{{ employee.photo.url }}"
                                                         class="img-thumbnail"
-                                                        alt="{{ employee.name }}'s nrc back"
+                                                        alt="{{ employee.name }}'s photo"
                                                         width="100%"
                                                     />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {% endif %}
-                                </li>
+                                {% endif %}
+                            </li>
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Family Record
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Name
+                                <p class="mb-0">{{ employee.name }}</p>
+                            </li>
 
-                                    {% if employee.identity.family_record %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Gender
+                                <p class="mb-0">{{ employee.gender }}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Birthday
+                                <p class="mb-0">{{ employee.dob }}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Distinct Mark
+                                <p class="mb-0">{% if employee.distinct_mark %}{{ employee.distinct_mark }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Father
+                                <p class="mb-0">{% if employee.father %}{{ employee.mother }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Mother
+                                <p class="mb-0">{% if employee.mother %}{{ employee.mother }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Phone
+                                <p class="mb-0">{{ employee.phone }}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Exact Address
+                                <p class="mb-0">{{ employee.exact_address }}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Payment
+                                <p class="mb-0">{% if employee.payment %}{{ employee.payment }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Position
+                                <p class="mb-0">{% if employee.position %}{{ employee.position }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Remark
+                                <p class="mb-0">{% if employee.remark %}{{ employee.remark }}{% endif %}</p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="identity" class="col-lg-4">
+                <div class="card my-2 p-3">
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Identity</h3>
+                        <button hx-target="#identity" hx-push-url="false" hx-get="{% if employee.identity %}{% url 'hrm:identity_update' employee.id employee.identity.id %}{% else %}{% url 'hrm:identity_create' employee.id %}{% endif %}" class="btn btn-tertiary text-black">Edit</button>
+                    </div>
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3">
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                NRC No
+                                <p class="mb-0">{{ employee.identity.nrc_no }}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                NRC Front
+
+                                {% if employee.identity.nrc_front %}
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#familyRecordModal">
+                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcFrontModal">
                                         View
                                     </button>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="familyRecordModal" tabindex="-1" aria-labelledby="familyRecordModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="nrcFrontModal" tabindex="-1" aria-labelledby="nrcFrontModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="familyRecordModalLabel">Family Record</h5>
+                                                    <h5 class="modal-title" id="nrcFrontModalLabel">NRC Front</h5>
                                                     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <img
-                                                        src="{{ employee.identity.family_record.url }}"
+                                                        src="{{ employee.identity.nrc_front.url }}"
                                                         class="img-thumbnail"
                                                         alt="{{ employee.name }}'s nrc front"
                                                         width="100%"
@@ -263,130 +198,191 @@
                                             </div>
                                         </div>
                                     </div>
-                                    {% endif %}
-                                </li>
+                                {% endif %}
+                            </li>
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Passport No
-                                    <p class="mb-0">{% if employee.identity.passport_no %}{{ employee.identity.passport_no }}{% endif %}</p>
-                                </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                NRC Back
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Issue Date
-                                    <p class="mb-0">{% if employee.identity.issue_date %}{{ employee.identity.issue_date }}{% endif %}</p>
-                                </li>
+                                {% if employee.identity.nrc_back %}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#nrcBackModal">
+                                    View
+                                </button>
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Expiry Date
-                                    <p class="mb-0">{% if employee.identity.expiry_date %}{{ employee.identity.expiry_date }}{% endif %}</p>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Passport
-
-                                    {% if employee.identity.passport_photo %}
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#passportModal">
-                                        View
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="passportModal" tabindex="-1" aria-labelledby="passportModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="passportModalLabel">Passport</h5>
-                                                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img
-                                                        src="{{ employee.identity.passport_photo.url }}"
-                                                        class="img-thumbnail"
-                                                        alt="{{ employee.name }}'s nrc front"
-                                                        width="100%"
-                                                    />
-                                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="nrcBackModal" tabindex="-1" aria-labelledby="nrcBackModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="nrcBackModalLabel">NRC Back</h5>
+                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img
+                                                    src="{{ employee.identity.nrc_back.url }}"
+                                                    class="img-thumbnail"
+                                                    alt="{{ employee.name }}'s nrc back"
+                                                    width="100%"
+                                                />
                                             </div>
                                         </div>
                                     </div>
-                                    {% endif %}
-                                </li>
+                                </div>
+                                {% endif %}
+                            </li>
 
-                                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                                    Remark
-                                    <p class="mb-0">{{ employee.identity.remark }}</p>
-                                </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Family Record
 
-                            </ul>
-                        </div>
+                                {% if employee.identity.family_record %}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#familyRecordModal">
+                                    View
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="familyRecordModal" tabindex="-1" aria-labelledby="familyRecordModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="familyRecordModalLabel">Family Record</h5>
+                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img
+                                                    src="{{ employee.identity.family_record.url }}"
+                                                    class="img-thumbnail"
+                                                    alt="{{ employee.name }}'s nrc front"
+                                                    width="100%"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Passport No
+                                <p class="mb-0">{% if employee.identity.passport_no %}{{ employee.identity.passport_no }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Issue Date
+                                <p class="mb-0">{% if employee.identity.issue_date %}{{ employee.identity.issue_date }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Expiry Date
+                                <p class="mb-0">{% if employee.identity.expiry_date %}{{ employee.identity.expiry_date }}{% endif %}</p>
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Passport
+
+                                {% if employee.identity.passport_photo %}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-tertiary text-black" data-mdb-toggle="modal" data-mdb-target="#passportModal">
+                                    View
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="passportModal" tabindex="-1" aria-labelledby="passportModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="passportModalLabel">Passport</h5>
+                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img
+                                                    src="{{ employee.identity.passport_photo.url }}"
+                                                    class="img-thumbnail"
+                                                    alt="{{ employee.name }}'s nrc front"
+                                                    width="100%"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </li>
+
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                Remark
+                                <p class="mb-0">{{ employee.identity.remark }}</p>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h3>Experience</h3>
-                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Designation</th>
-                                        <th scope="col">Company</th>
-                                        <th scope="col">From</th>
-                                        <th scope="col">To</th>
-                                        <th scope="col">Remark</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for experience in employee.experience_set.all %}
-                                        <tr>
-                                            <td>{{ experience.designation }}</td>
-                                            <td>{{ experience.company }}</td>
-                                            <td>{% if experience.from_date%}{{ experience.from_date }}{% endif %}</td>
-                                            <td>{% if experience.current_job %}Current{% else %}{% if experience.to_date%}{{ experience.to_date }}{% endif %}{% endif %}</td>
-                                            <td>{{ experience.remark }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h3>Qualification</h3>
-                            <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Qualification</th>
-                                        <th scope="col">Institude</th>
-                                        <th scope="col">Year</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for qualification in employee.qualification_set.all %}
-                                        <tr>
-                                            <td>{{ qualification.qualification }}</td>
-                                            <td>{{ qualification.institute }}</td>
-                                            <td>{{ qualification.year }}</td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
 
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Experience</h3>
+                        <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">From</th>
+                                    <th scope="col">To</th>
+                                    <th scope="col">Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for experience in employee.experience_set.all %}
+                                    <tr>
+                                        <td>{{ experience.designation }}</td>
+                                        <td>{{ experience.company }}</td>
+                                        <td>{% if experience.from_date%}{{ experience.from_date }}{% endif %}</td>
+                                        <td>{% if experience.current_job %}Current{% else %}{% if experience.to_date%}{{ experience.to_date }}{% endif %}{% endif %}</td>
+                                        <td>{{ experience.remark }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <h3>Qualification</h3>
+                        <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Qualification</th>
+                                    <th scope="col">Institude</th>
+                                    <th scope="col">Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for qualification in employee.qualification_set.all %}
+                                    <tr>
+                                        <td>{{ qualification.qualification }}</td>
+                                        <td>{{ qualification.institute }}</td>
+                                        <td>{{ qualification.year }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 {% endblock main %}

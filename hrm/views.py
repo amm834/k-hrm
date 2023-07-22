@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.db.models import Q
 
@@ -49,9 +50,6 @@ class EmployeeUpdateView(UpdateView):
     model = models.Employee
     lookup_field = 'id'
     form_class = forms.EmployeeForm
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'id': self.object.id})

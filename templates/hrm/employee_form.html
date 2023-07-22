@@ -4,7 +4,7 @@
 
 {% block main %}
     <section class="m-3 p-3">
-        <form hx-post="{% url 'hrm:employee_update' employee.id %}">
+        <form hx-post="{% url 'hrm:employee_update' employee.id %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="block p-1">
                 <h3 class="text-center">Employee</h3>
@@ -13,11 +13,35 @@
                     <button type="submit" class="btn btn-black m-1" data-mdb-ripple-color="black">Save</button>
                 </div>
                 <div class="m-1">
-                    {% if form.non_field_errors %}
+                    {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
-                            {{ form.non_field_errors }}
+                            {{ form.errors }}
                         </div>
                     {% endif %}
+                    <div class="form-outline">
+                        <label for="id_id">ID:</label>
+                        <input type="text" value="{{ employee.id }}" disabled id="id_id">
+                    </div>
+                    <div class="form-outline">
+                        <label for="id_user">Email:</label>
+                        <input type="text" value="{{ employee.user.email }}" disabled id="id_user">
+                        <select name="user" required id="id_user" hidden>
+                            <option value="{{ employee.user.id }}" selected>{{ employee.user.email }}</option>
+                        </select>
+                    </div>
+                    <div class="form-outline">
+                        {% if employee.photo %}
+                            <div>
+                                <img src="{{ employee.photo.url }}" style="width: 150px;">
+                            </div>
+                            <div>
+                                <input type="checkbox" name="photo-clear" id="photo-clear_id">
+                                <label for="photo-clear_id">Remove Photo</label>
+                            </div>
+                        {% endif %}
+                        <label for="id_photo">Photo:</label>
+                        <input type="file" name="photo" accept="image/*" id="id_photo">
+                    </div>
                     <div class="form-outline">
                         <label for="id_name">Name:</label>
                         <input type="text" name="name" value="{{ employee.name }}" maxlength="50" required id="id_name">
@@ -58,8 +82,7 @@
                     </div>
                     <div class="form-outline">
                         <label for="id_exact_address">Exact address:</label>
-                        <textarea name="exact_address" cols="40" rows="10" id="id_exact_address">{{ employee.exact_address }}
-                        </textarea>
+                        <textarea name="exact_address" cols="40" rows="10" id="id_exact_address">{{ employee.exact_address }}</textarea>
                     </div>
                     <div class="form-outline">
                         <label for="id_payment">Payment:</label>
@@ -81,17 +104,7 @@
                     </div>
                     <div class="form-outline">
                         <label for="id_remark">Remark:</label>
-                        <textarea name="remark" cols="40" rows="10" id="id_remark">
-                            {{ employee.remark }}
-                        </textarea>
-                    </div>
-                    <div class="form-outline">
-                        <label for="id_photo">Photo:</label>
-                        Currently: <a href="/uploads/employee/profile-picture.jpg">employee/profile-picture.jpg</a>
-                        <input type="checkbox" name="photo-clear" id="photo-clear_id">
-                        <label for="photo-clear_id">Clear</label><br>
-                        Change:
-                        <input type="file" name="photo" accept="image/*" id="id_photo">
+                        <textarea name="remark" cols="40" rows="10" id="id_remark">{{ employee.remark }}</textarea>
                     </div>
                 </div>
             </div>

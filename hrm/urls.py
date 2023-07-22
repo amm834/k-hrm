@@ -2,12 +2,14 @@ from django.urls import path
 from hrm import views
 
 from django.contrib.auth.decorators import login_required
+from hrm.views import EmployeeCreateView
 
 app_name = "hrm"
 urlpatterns = [
     # employee
     path('employee_list/', login_required(views.EmployeeListView.as_view()), name="employee_list"),
     path('employee_detail/<employee_id>/', login_required(views.EmployeeDetailView.as_view()), name='employee_detail'),
+    path('employee_create/', login_required(views.EmployeeCreateView.as_view()), name='employee_create'),
     path('employee_update/<employee_id>/', login_required(views.EmployeeUpdateView.as_view()), name='employee_update'),
 
     # identity

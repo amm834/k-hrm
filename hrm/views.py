@@ -46,6 +46,13 @@ class EmployeeDetailView(DetailView):
             return self.model.objects.filter(Q(user__id__exact=self.request.user.id))
         return self.model
 
+class EmployeeCreateView(CreateView):
+    model = models.Employee
+    form_class = forms.EmployeeForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.id})
+
 class EmployeeUpdateView(UpdateView):
     model = models.Employee
     lookup_url_kwarg = 'employee_id'

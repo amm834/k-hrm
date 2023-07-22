@@ -1,3 +1,5 @@
+{% load static %}
+
 {% if form.instance.id %}
     <form hx-post="{% url 'hrm:employee_update' employee.id %}" enctype="multipart/form-data">
         {% csrf_token %}
@@ -44,13 +46,10 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <label class="form-label" for="id_gender">Gender</label>
                         <select class="select select-initialized" name="gender" required id="id_gender">
+                            <option value="" selected disabled>Select Gender</option>
                             {% for gender in form.gender.field.choices %}
-                                {% if gender.0 == None %}
-                                    <option value="" selected disabled>Select Gender</option>
-                                {% else %}
-                                    {% if gender.0 != '' %}
-                                        <option value="{{ gender.0 }}" {% if gender.0 == employee.gender %}selected{% endif %}>{{ gender.1 }}</option>
-                                    {% endif %}
+                                {% if gender.0 %}
+                                    <option value="{{ gender.0 }}" {% if gender.0 == employee.gender %}selected{% endif %}>{{ gender.1 }}</option>
                                 {% endif %}
                             {% endfor %}
                         </select>
@@ -118,17 +117,137 @@
 {% else %}
     <form hx-post="{% url 'hrm:employee_create' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="card my-2 p-3">
-            <div class="card-header d-flex justify-content-between">
-                <h3>Employee</h3>
-                <div class="justify-self-end">
-                    <button hx-get="{% url 'hrm:employee_list' %}" class="btn btn-tertiary text-black">Cancel</button>
-                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card my-2">
+                            <div class="card-body text-center">
+                                <img src="{% static 'hrm/profile_photo.jpg' %}" style="width: 150px;">
+                                <h5 class="my-3"></h5>
+                                <p></p>
+                            </div>
+                        </div>
+                        <div class="card my-2 p-3">
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush rounded-3">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        Position
+                                        {% if employee.position%}
+                                            <p class="mb-0">{{ employee.position }}</p>
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        Team
+                                        {% if employee.position%}
+                                            <p class="mb-0">{{ employee.position.team }}</p>
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        Department
+                                        {% if employee.position%}
+                                            <p class="mb-0">{{ employee.position.team.department }}</p>
+                                        {% endif %}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="employee" class="col-lg-4">
+                        <div class="card my-2 p-3">
+                            <div class="card-header d-flex justify-content-between">
+                                <h3>Employee</h3>
+                                <div class="justify-self-end">
+                                    <button hx-get="{% url 'hrm:employee_list' %}" class="btn btn-tertiary text-black">Cancel</button>
+                                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush rounded-3">
+                                    {% if form.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ form.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_user">Email</label>
+                                        <select name="user" required id="id_user">
+                                            {% for user in form.user.field.queryset.all %}
+                                                <option value="{{ user.id }}">{{ user.email }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_photo">Photo</label>
+                                        <input type="file" name="photo" accept="image/*" id="id_photo">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_name">Name</label>
+                                        <input type="text" name="name" maxlength="50" required id="id_name">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_gender">Gender</label>
+                                        <select class="select select-initialized" name="gender" required id="id_gender">
+                                            <option value="" selected disabled>Select Gender</option>
+                                            {% for gender in form.gender.field.choices %}
+                                                {% if gender.0 %}
+                                                    <option value="{{ gender.0 }}" {% if gender.0 == employee.gender %}selected{% endif %}>{{ gender.1 }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_dob">Birthday</label>
+                                        <input type="date" name="dob" required id="id_dob">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_distinct_mark">Distinct mark</label>
+                                        <input type="text" name="distinct_mark" maxlength="50" id="id_distinct_mark">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_father">Father</label>
+                                        <input type="text" name="father" value="{% if employee.father %}{{ employee.father }}{% endif %}" maxlength="50" id="id_father">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_mother">Mother</label>
+                                        <input type="text" name="mother" maxlength="50" id="id_mother">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_phone">Phone</label>
+                                        <input type="number" name="phone" required id="id_phone">
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_exact_address">Exact address</label>
+                                        <textarea name="exact_address" id="id_exact_address"></textarea>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_payment">Payment</label>
+                                        <select name="payment" id="id_payment">
+                                            <option value="" selected disabled>Select Payment</option>
+                                            {% for payment in form.payment.field.queryset.all %}
+                                                <option value="{{ payment.pk }}" {% if payment.pk == employee.payment.pk %}selected{% endif %}>{{ payment.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_position">Position</label>
+                                        <select name="position" id="id_position">
+                                            <option value="" selected disabled>Select Position</option>
+                                            {% for position in form.position.field.queryset.all %}
+                                                <option value="{{ position.pk }}" {% if position.pk == employee.position.pk %}selected{% endif %}>{{ position }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                        <label class="form-label" for="id_remark">Remark</label>
+                                        <textarea name="remark" id="id_remark"></textarea>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body p-0">
-                {{ form.as_p }}
-            </div>
-        </div>
+        </section>
     </form>
 {% endif %}

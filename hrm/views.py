@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.db.models import Q
 
@@ -53,6 +53,11 @@ class EmployeeCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.id})
 
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
+
 class EmployeeUpdateView(UpdateView):
     model = models.Employee
     lookup_url_kwarg = 'employee_id'
@@ -73,10 +78,10 @@ class IdentityCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
 
-    def get_queryset(self):
+    def dispatch(self, request, *args, **kwargs):
         if not self.request.user.is_superuser or not self.request.user.is_staff:
-            return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
-        return self.model
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
 
 class IdentityUpdateView(UpdateView):
     model = models.Identity

@@ -24,6 +24,14 @@
 
     <!-- HTMX -->
     <script src="{% static 'htmx-1.9.2/htmx.min.js' %}"></script>
+
+    <style>
+        input[type='file'] {
+            color: transparent;
+            width: 100px;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body
     hx-target="body"

@@ -7,7 +7,6 @@
     <th>name</th>
     <th>email</th>
     <th>phone</th>
-    <th>gender</th>
     <th>nrc</th>
     <th>position</th>
     <th>dob</th>
@@ -22,7 +21,6 @@
             <td>{{ employee.name }}</td>
             <td>{{ employee.user.email }}</td>
             <td>{{ employee.phone }}</td>
-            <td>{{ employee.gender }} </td>
             <td>
                 {% if employee.identity != None%}
                     {{ employee.identity.nrc_no }}

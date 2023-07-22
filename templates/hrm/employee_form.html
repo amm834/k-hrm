@@ -19,124 +19,96 @@
                 {% endif %}
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_id">ID</label>
-                        <input type="text" class="form-control" value="{{ employee.id }}" disabled id="id_id">
-                    </div>
+                    <label class="form-label" for="id_id">ID</label>
+                    <input type="text" value="{{ employee.id }}" disabled id="id_id">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_user">Email</label>
-                        <input type="text" class="form-control" value="{{ employee.user.email }}" disabled id="id_user">
-                        <select name="user" required id="id_user" hidden>
-                            <option value="{{ employee.user.id }}" selected>{{ employee.user.email }}</option>
-                        </select>
-                    </div>
+                    <label class="form-label" for="id_user">Email</label>
+                    <input type="text" value="{{ employee.user.email }}" disabled id="id_user">
+                    <select name="user" required id="id_user" hidden>
+                        <option value="{{ employee.user.id }}" selected>{{ employee.user.email }}</option>
+                    </select>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_photo">Photo</label>
-                        <input class="form-control" type="file" name="photo" accept="image/*" id="id_photo">
-                    </div>
+                    <label class="form-label" for="id_photo">Photo</label>
+                    <input type="file" name="photo" accept="image/*" id="id_photo">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_name">Name</label>
-                        <input type="text" class="form-control" name="name" value="{{ employee.name }}" maxlength="50" required id="id_name">
-                    </div>
+                    <label class="form-label" for="id_name">Name</label>
+                    <input type="text" name="name" value="{{ employee.name }}" maxlength="50" required id="id_name">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_gender">Gender</label>
-                        <select class="select select-initialized" name="gender" required id="id_gender">
-                            {% for gender in form.gender.field.choices %}
-                                {% if gender.0 == None %}
-                                    <option value="" selected disabled>Select Gender</option>
-                                {% else %}
-                                    {% if gender.0 != '' %}
-                                        <option value="{{ gender.0 }}" {% if gender.0 == employee.gender %}selected{% endif %}>{{ gender.1 }}</option>
-                                    {% endif %}
+                    <label class="form-label" for="id_gender">Gender</label>
+                    <select class="select select-initialized" name="gender" required id="id_gender">
+                        {% for gender in form.gender.field.choices %}
+                            {% if gender.0 == None %}
+                                <option value="" selected disabled>Select Gender</option>
+                            {% else %}
+                                {% if gender.0 != '' %}
+                                    <option value="{{ gender.0 }}" {% if gender.0 == employee.gender %}selected{% endif %}>{{ gender.1 }}</option>
                                 {% endif %}
-                            {% endfor %}
-                        </select>
-                    </div>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_dob">Birthday</label>
-                        <input type="date" name="dob" value="{{ employee.dob|date:'Y-m-d' }}" required id="id_dob">
-                    </div>
+                    <label class="form-label" for="id_dob">Birthday</label>
+                    <input type="date" name="dob" value="{{ employee.dob|date:'Y-m-d' }}" required id="id_dob">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_distinct_mark">Distinct mark</label>
-                        <input type="text" class="form-control" name="distinct_mark" value="{% if employee.distinct_mark %}{{ employee.distinct_mark }}{% endif %}" maxlength="50" id="id_distinct_mark">
-                    </div>
+                    <label class="form-label" for="id_distinct_mark">Distinct mark</label>
+                    <input type="text" name="distinct_mark" value="{% if employee.distinct_mark %}{{ employee.distinct_mark }}{% endif %}" maxlength="50" id="id_distinct_mark">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_father">Father</label>
-                        <input type="text" class="form-control" name="father" value="{% if employee.father %}{{ employee.father }}{% endif %}" maxlength="50" id="id_father">
-                    </div>
+                    <label class="form-label" for="id_father">Father</label>
+                    <input type="text" name="father" value="{% if employee.father %}{{ employee.father }}{% endif %}" maxlength="50" id="id_father">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_mother">Mother</label>
-                        <input type="text" class="form-control" name="mother" value="{% if employee.mother %}{{ employee.mother }}{% endif %}" maxlength="50" id="id_mother">
-                    </div>
+                    <label class="form-label" for="id_mother">Mother</label>
+                    <input type="text" name="mother" value="{% if employee.mother %}{{ employee.mother }}{% endif %}" maxlength="50" id="id_mother">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_phone">Phone</label>
-                        <input type="number" name="phone" value="{{ employee.phone }}" required id="id_phone">
-                    </div>
+                    <label class="form-label" for="id_phone">Phone</label>
+                    <input type="number" name="phone" value="{{ employee.phone }}" required id="id_phone">
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_exact_address">Exact address</label>
-                        <textarea class="form-control" name="exact_address" id="id_exact_address">{{ employee.exact_address }}</textarea>
-                    </div>
+                    <label class="form-label" for="id_exact_address">Exact address</label>
+                    <textarea name="exact_address" id="id_exact_address">{{ employee.exact_address }}</textarea>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_payment">Payment</label>
-                        <select name="payment" id="id_payment">
-                            <option value="" selected disabled>Select Payment</option>
-                            {% for payment in form.payment.field.queryset.all %}
-                                <option value="{{ payment.pk }}" {% if payment.pk == employee.payment.pk %}selected{% endif %}>{{ payment.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    <label class="form-label" for="id_payment">Payment</label>
+                    <select name="payment" id="id_payment">
+                        <option value="" selected disabled>Select Payment</option>
+                        {% for payment in form.payment.field.queryset.all %}
+                            <option value="{{ payment.pk }}" {% if payment.pk == employee.payment.pk %}selected{% endif %}>{{ payment.name }}</option>
+                        {% endfor %}
+                    </select>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_position">Position</label>
-                        <select name="position" id="id_position">
-                            <option value="" selected disabled>Select Position</option>
-                            {% for position in form.position.field.queryset.all %}
-                                <option value="{{ position.pk }}" {% if position.pk == employee.position.pk %}selected{% endif %}>{{ position }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    <label class="form-label" for="id_position">Position</label>
+                    <select name="position" id="id_position">
+                        <option value="" selected disabled>Select Position</option>
+                        {% for position in form.position.field.queryset.all %}
+                            <option value="{{ position.pk }}" {% if position.pk == employee.position.pk %}selected{% endif %}>{{ position }}</option>
+                        {% endfor %}
+                    </select>
                 </li>
 
                 <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                    <div class="form-outline">
-                        <label class="form-label" for="id_remark">Remark</label>
-                        <textarea class="form-control" name="remark" id="id_remark">{{ employee.remark }}</textarea>
-                    </div>
+                    <label class="form-label" for="id_remark">Remark</label>
+                    <textarea name="remark" id="id_remark">{{ employee.remark }}</textarea>
                 </li>
 
             </ul>

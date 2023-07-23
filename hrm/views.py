@@ -2,7 +2,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 from django.db.models import Q
 
-from vanilla import ListView, CreateView, DetailView, UpdateView
+from vanilla import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from hrm import models
 from hrm import forms
@@ -95,3 +95,77 @@ class IdentityUpdateView(UpdateView):
         if not self.request.user.is_superuser or not self.request.user.is_staff:
             return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
         return self.model
+
+class ExperienceCreateView(CreateView):
+    model = models.Experience
+    form_class = forms.ExperienceForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
+
+class ExperienceUpdateView(UpdateView):
+    model = models.Experience
+    lookup_url_kwarg = 'experience_id'
+    form_class = forms.ExperienceForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
+        return self.model
+
+class ExperienceDeleteView(DeleteView):
+    model = models.Experience
+    lookup_url_kwarg = 'experience_id'
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_superuser or self.request.user.is_staff or self.request.user.employee.id == self.object.employee.id:
+            return self.post(self, request, *args, **kwargs)
+        return Http404
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+class QualificationCreateView(CreateView):
+    model = models.Qualification
+    form_class = forms.QualificationForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            raise Http404
+        return super().dispatch(request, *args, **kwargs)
+
+class QualificationUpdateView(UpdateView):
+    model = models.Qualification
+    lookup_url_kwarg = 'qualification_id'
+    form_class = forms.QualificationForm
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+    def get_queryset(self):
+        if not self.request.user.is_superuser or not self.request.user.is_staff:
+            return self.model.objects.filter(Q(employee__id__exact=self.request.user.employee.id))
+        return self.model
+
+class QualificationDeleteView(DeleteView):
+    model = models.Qualification
+    lookup_url_kwarg = 'qualification_id'
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_superuser or self.request.user.is_staff or self.request.user.employee.id == self.object.employee.id:
+            return self.post(self, request, *args, **kwargs)
+        return Http404
+
+    def get_success_url(self):
+        return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})

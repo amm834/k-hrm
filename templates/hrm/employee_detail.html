@@ -160,7 +160,9 @@
                 <div class="card my-2 p-3">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Identity</h3>
-                        <button hx-target="#identity" hx-push-url="false" hx-get="{% if employee.identity %}{% url 'hrm:identity_update' employee.id employee.identity.id %}{% else %}{% url 'hrm:identity_create' employee.id %}{% endif %}" class="btn btn-tertiary text-black">Edit</button>
+                        <div class="justify-self-end">
+                            <button hx-target="#identity" hx-push-url="false" hx-get="{% if employee.identity %}{% url 'hrm:identity_update' employee.id employee.identity.id %}{% else %}{% url 'hrm:identity_create' employee.id %}{% endif %}" class="btn btn-tertiary text-black">Edit</button>
+                        </div>
                     </div>
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush rounded-3">
@@ -321,21 +323,23 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-6">
+            <div id="experience" class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Experience</h3>
-                        <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
+                        <div class="justify-self-end">
+                            <button hx-target="#experience" hx-push-url="false" hx-get="{% url 'hrm:experience_create' employee.id %}" class="btn btn-tertiary text-black">Create</button>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">Designation</th>
                                     <th scope="col">Company</th>
                                     <th scope="col">From</th>
                                     <th scope="col">To</th>
-                                    <th scope="col">Remark</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -345,7 +349,11 @@
                                         <td>{{ experience.company }}</td>
                                         <td>{% if experience.from_date%}{{ experience.from_date }}{% endif %}</td>
                                         <td>{% if experience.current_job %}Current{% else %}{% if experience.to_date%}{{ experience.to_date }}{% endif %}{% endif %}</td>
-                                        <td>{{ experience.remark }}</td>
+                                        <td>
+                                            <button hx-target="#experience" hx-push-url="false" hx-get="{% url 'hrm:experience_update' employee.id experience.id %}" class="btn btn-tertiary text-black">Edit</button>
+                                            <br>
+                                            <button hx-get="{% url 'hrm:experience_delete' employee.id experience.id %}" class="btn btn-tertiary text-black">Delete</button>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -353,19 +361,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div id="qualification" class="col-lg-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3>Qualification</h3>
-                        <button hx-get="{% url 'hrm:employee_update' employee.id %}" class="btn btn-tertiary text-black">Edit</button>
+                        <div class="justify-self-end">
+                            <button hx-target="#qualification" hx-push-url="false" hx-get="{% url 'hrm:qualification_create' employee.id %}" class="btn btn-tertiary text-black">Create</button>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered">
+                        <table class="table table-responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">Qualification</th>
                                     <th scope="col">Institude</th>
                                     <th scope="col">Year</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -374,6 +385,11 @@
                                         <td>{{ qualification.qualification }}</td>
                                         <td>{{ qualification.institute }}</td>
                                         <td>{{ qualification.year }}</td>
+                                        <td>
+                                            <button hx-target="#qualification" hx-push-url="false" hx-get="{% url 'hrm:qualification_update' employee.id qualification.id %}" class="btn btn-tertiary text-black">Edit</button>
+                                            <br>
+                                            <button hx-get="{% url 'hrm:qualification_delete' employee.id qualification.id %}" class="btn btn-tertiary text-black">Delete</button>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

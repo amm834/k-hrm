@@ -1,0 +1,81 @@
+{% if form.instance.id %}
+    <form hx-post="{% url 'hrm:experience_update' view.kwargs.employee_id experience.id %}">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Experience</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' view.kwargs.employee_id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <select name="employee" required id="id_employee" hidden>
+                    <option value="{{ view.kwargs.employee_id }}" selected></option>
+                </select>
+                <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_designation">Designation</label>
+                        <input type="text" name="designation" value="{{ experience.designation }}" maxlength="50" required id="id_designation">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_company">Company</label>
+                        <input type="text" name="company" value="{{ experience.company }}" maxlength="50" required id="id_company">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_from_date">From</label>
+                        <input type="date" name="from_date" value="{{ experience.from_date }}" id="id_from_date">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_to_date">To</label>
+                        <input type="date" name="to_date" value="{{ experience.to_date }}" id="id_to_date">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_current_job">Current</label>
+                        <input type="checkbox" name="current_job" id="id_current_job" {% if experience.current_job %}checked{% endif %}>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% else %}
+    <form hx-post="{% url 'hrm:experience_create' view.kwargs.employee_id %}">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Experience</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' view.kwargs.employee_id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <select name="employee" required id="id_employee" hidden>
+                    <option value="{{ view.kwargs.employee_id }}" selected></option>
+                </select>
+                <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_designation">Designation</label>
+                        <input type="text" name="designation" maxlength="50" required id="id_designation">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_company">Company</label>
+                        <input type="text" name="company" maxlength="50" required id="id_company">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_from_date">From</label>
+                        <input type="date" name="from_date" value="{{ experience.from_date }}" id="id_from_date">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_to_date">To</label>
+                        <input type="date" name="to_date" id="id_to_date">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_current_job">Current</label>
+                        <input type="checkbox" name="current_job" id="id_current_job">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% endif %}

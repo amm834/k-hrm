@@ -1,0 +1,65 @@
+{% if form.instance.id %}
+    <form hx-post="{% url 'hrm:qualification_update' view.kwargs.employee_id qualification.id %}">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Qualification</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' view.kwargs.employee_id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <select name="employee" required id="id_employee" hidden>
+                    <option value="{{ view.kwargs.employee_id }}" selected></option>
+                </select>
+                <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_qualification">Qualification</label>
+                        <input type="text" name="qualification" value="{{ qualification.qualification }}" maxlength="50" required id="id_qualification">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_institute">Institude</label>
+                        <input type="text" name="institute" value="{{ qualification.institute }}" maxlength="50" required id="id_institute">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_year">Year</label>
+                        <input type="number" name="year" value="{{ qualification.year }}" required id="id_year">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% else %}
+    <form hx-post="{% url 'hrm:qualification_create' view.kwargs.employee_id %}">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <h3>Qualification</h3>
+                <div class="justify-self-end">
+                    <button hx-get="{% url 'hrm:employee_detail' view.kwargs.employee_id %}" class="btn btn-tertiary text-black">Cancel</button>
+                    <button type="submit" class="btn btn-tertiary text-black">Save</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <select name="employee" required id="id_employee" hidden>
+                    <option value="{{ view.kwargs.employee_id }}" selected></option>
+                </select>
+                <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_qualification">Qualification</label>
+                        <input type="text" name="qualification" maxlength="50" required id="id_qualification">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_institute">Institude</label>
+                        <input type="text" name="institute" maxlength="50" required id="id_institute">
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                        <label class="form-label" for="id_year">Year</label>
+                        <input type="number" name="year" required id="id_year">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% endif %}

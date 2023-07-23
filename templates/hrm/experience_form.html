@@ -10,10 +10,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <select name="employee" required id="id_employee" hidden>
-                    <option value="{{ view.kwargs.employee_id }}" selected></option>
-                </select>
                 <ul class="list-group list-group-flush rounded-3">
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                    <select name="employee" required id="id_employee" hidden>
+                        <option value="{{ view.kwargs.employee_id }}" selected></option>
+                    </select>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <label class="form-label" for="id_designation">Designation</label>
                         <input type="text" name="designation" value="{{ experience.designation }}" maxlength="50" required id="id_designation">
@@ -50,10 +55,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <select name="employee" required id="id_employee" hidden>
-                    <option value="{{ view.kwargs.employee_id }}" selected></option>
-                </select>
                 <ul class="list-group list-group-flush rounded-3">
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                    <select name="employee" required id="id_employee" hidden>
+                        <option value="{{ view.kwargs.employee_id }}" selected></option>
+                    </select>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                         <label class="form-label" for="id_designation">Designation</label>
                         <input type="text" name="designation" maxlength="50" required id="id_designation">

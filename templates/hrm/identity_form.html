@@ -13,6 +13,12 @@
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush rounded-3">
 
+                        {% if form.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+
                         <select name="employee" required id="id_employee" hidden>
                             <option value="{{ identity.employee.id }}" selected>{{ identity.employee.name }}</option>
                         </select>

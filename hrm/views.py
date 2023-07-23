@@ -79,9 +79,12 @@ class IdentityCreateView(CreateView):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_superuser or not self.request.user.is_staff:
+        if self.request.user.employee.id == kwargs['employee_id']:
+            return super().dispatch(request, *args, **kwargs)
+        elif self.request.user.is_superuser or self.request.user.is_staff:
+            return super().dispatch(request, *args, **kwargs)
+        else:
             raise Http404
-        return super().dispatch(request, *args, **kwargs)
 
 class IdentityUpdateView(UpdateView):
     model = models.Identity
@@ -104,9 +107,12 @@ class ExperienceCreateView(CreateView):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_superuser or not self.request.user.is_staff:
+        if self.request.user.employee.id == kwargs['employee_id']:
+            return super().dispatch(request, *args, **kwargs)
+        elif self.request.user.is_superuser or self.request.user.is_staff:
+            return super().dispatch(request, *args, **kwargs)
+        else:
             raise Http404
-        return super().dispatch(request, *args, **kwargs)
 
 class ExperienceUpdateView(UpdateView):
     model = models.Experience
@@ -126,9 +132,11 @@ class ExperienceDeleteView(DeleteView):
     lookup_url_kwarg = 'experience_id'
 
     def get(self, request, *args, **kwargs):
-        if self.request.user.is_superuser or self.request.user.is_staff or self.request.user.employee.id == self.object.employee.id:
+        if self.request.user.employee.id == kwargs['employee_id']:
             return self.post(self, request, *args, **kwargs)
-        return Http404
+        elif self.request.user.is_superuser or self.request.user.is_staff:
+            return self.post(self, request, *args, **kwargs)
+        raise Http404
 
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
@@ -141,9 +149,12 @@ class QualificationCreateView(CreateView):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
 
     def dispatch(self, request, *args, **kwargs):
-        if not self.request.user.is_superuser or not self.request.user.is_staff:
+        if self.request.user.employee.id == kwargs['employee_id']:
+            return super().dispatch(request, *args, **kwargs)
+        elif self.request.user.is_superuser or self.request.user.is_staff:
+            return super().dispatch(request, *args, **kwargs)
+        else:
             raise Http404
-        return super().dispatch(request, *args, **kwargs)
 
 class QualificationUpdateView(UpdateView):
     model = models.Qualification
@@ -163,9 +174,11 @@ class QualificationDeleteView(DeleteView):
     lookup_url_kwarg = 'qualification_id'
 
     def get(self, request, *args, **kwargs):
-        if self.request.user.is_superuser or self.request.user.is_staff or self.request.user.employee.id == self.object.employee.id:
+        if self.request.user.employee.id == kwargs['employee_id']:
             return self.post(self, request, *args, **kwargs)
-        return Http404
+        elif self.request.user.is_superuser or self.request.user.is_staff:
+            return self.post(self, request, *args, **kwargs)
+        raise Http404
 
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})

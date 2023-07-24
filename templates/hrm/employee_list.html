@@ -2,6 +2,8 @@
 
 {% block title %}Employee List{% endblock title %}
 
+{% block create_url %}{% url 'hrm:employee_create' %}{% endblock create_url %}
+
 {% block thead %}
     <th>id</th>
     <th>name</th>
@@ -40,5 +42,4 @@
     {% empty %}
         <h3>No data.</h3>
     {% endfor %}
-
 {% endblock tbody %}

@@ -9,7 +9,7 @@
                 <nav>
                     <ul class="pagination pagination-sm justify-content-end">
                         <div class="input-group rounded col">
-                            <button hx-target="#datatable" hx-push-url='false' hx-get="{% url 'hrm:employee_create' %}" class="btn btn-black">Create</button>
+                            <button hx-target="#datatable" hx-push-url='false' hx-get="{% block create_url %}#{% endblock create_url %}" class="btn btn-black">Create</button>
                         </div>
                         <form id="search" class="page-item mx-2" hx-get="{{ request.path }}">
                             <div class="row">

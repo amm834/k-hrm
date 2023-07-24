@@ -89,9 +89,13 @@
                         <label class="form-label" for="id_payment">Payment</label>
                         <select name="payment" id="id_payment">
                             <option value="" selected disabled>Select Payment</option>
-                            {% for payment in form.payment.field.queryset.all %}
-                                <option value="{{ payment.pk }}" {% if payment.pk == employee.payment.pk %}selected{% endif %}>{{ payment.name }}</option>
-                            {% endfor %}
+                            {% if user.is_superuser or user.is_staff %}
+                                {% for payment in form.payment.field.queryset.all %}
+                                    <option value="{{ payment.pk }}" {% if payment.pk == employee.payment.id %}selected{% endif %}>{{ payment.name }}</option>
+                                {% endfor %}
+                            {% elif employee.payment %}
+                                <option value="{{ employee.payment.id }}" selected>{{ employee.payment.name }}</option>
+                            {% endif %}
                         </select>
                     </li>
 
@@ -99,9 +103,13 @@
                         <label class="form-label" for="id_position">Position</label>
                         <select name="position" id="id_position">
                             <option value="" selected disabled>Select Position</option>
-                            {% for position in form.position.field.queryset.all %}
-                                <option value="{{ position.pk }}" {% if position.pk == employee.position.pk %}selected{% endif %}>{{ position }}</option>
-                            {% endfor %}
+                            {% if user.is_superuser or user.is_staff %}
+                                {% for position in form.position.field.queryset.all %}
+                                    <option value="{{ position.pk }}" {% if position.pk == employee.position.id %}selected{% endif %}>{{ position }}</option>
+                                {% endfor %}
+                            {% elif employee.position %}
+                                <option value="{{ employee.position.id }}" selected>{{ employee.position.name }}</option>
+                            {% endif %}
                         </select>
                     </li>
 

@@ -25,4 +25,7 @@ urlpatterns = [
     path('employee_detail/<int:employee_id>/qualification_create/', login_required(views.QualificationCreateView.as_view()), name='qualification_create'),
     path('employee_detail/<int:employee_id>/qualification_update/<int:qualification_id>/', login_required(views.QualificationUpdateView.as_view()), name='qualification_update'),
     path('employee_detail/<int:employee_id>/qualification_delete/<int:qualification_id>/', login_required(views.QualificationDeleteView.as_view()), name='qualification_delete'),
+
+    # admin
+    path('admin/', views.AdminView.as_view(), name="admin")
 ]

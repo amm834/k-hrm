@@ -2,7 +2,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 from django.db.models import Q
 
-from vanilla import ListView, DetailView, CreateView, UpdateView, DeleteView
+from vanilla import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
 from hrm import models
 from hrm import forms
@@ -206,3 +206,6 @@ class QualificationDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('hrm:employee_detail', kwargs={'employee_id': self.object.employee.id})
+
+class AdminView(TemplateView):
+    template_name = 'hrm/admin.html'

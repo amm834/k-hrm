@@ -1,5 +1,7 @@
-# Human Resource Management System in Django using Python (Archived)
-> This project is currently abandoned and will be re-written in other language instead of Python.
+# Human Resource Management System in Django
+Human Resource Management System aka K-HRM is a one of the solution intended to HR and related fields.
+
+## DEPR: THIS PROJECT IS CURRENTLY UNDER INACTIVE DEVELOPMENT STAGE AND COULD BE ABANDONED IN THE FUTURE DUE TO MY POOR TIME MANAGEMENT AND SEVERAL OTHER REASONS.
 
 # Setup
 Make sure you have Python installed on your computer.
